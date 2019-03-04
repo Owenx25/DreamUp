@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FAB from 'react-native-fab'
-import { LineChart, YAxis, XAxis, Grid } from 'react-native-svg-charts'
+import { LineChart, AreaChart, YAxis, XAxis, Grid } from 'react-native-svg-charts'
 import { StyleSheet, ScrollView, FlatList, Text, View } from 'react-native'
 
 export default class App extends React.Component {
@@ -133,7 +133,43 @@ class DreamCard extends Component {
   }
 }
 
-const graph_data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
+const graph_data = [ 
+  {
+    fragments: 3,
+    day: new Date(2019, 3, 3),
+    name: 'MON'
+  },
+  {
+    fragments: 1,
+    day: new Date(2019, 3, 4),
+    name: 'MON'
+  },
+  {
+    fragments: 3,
+    day: new Date(2019, 3, 5),
+    name: 'MON'
+  },
+  {
+    fragments: 2,
+    day: new Date(2019, 3, 6),
+    name: 'MON'
+  },
+  {
+    fragments: 2,
+    day: new Date(2019, 3, 7),
+    name: 'MON'
+  },
+  {
+    fragments: 5,
+    day: new Date(2019, 3, 8),
+    name: 'MON'
+  },
+  {
+    fragments: 1,
+    day: new Date(2019, 3, 9),
+    name: 'MON'
+  },
+]
 // Graph of some data related to dreams
 class DreamGraph extends Component {
   render() {
@@ -141,25 +177,41 @@ class DreamGraph extends Component {
       <View style={styles.graphcontainer}>
         <YAxis
           data={graph_data}
-          style={{marginBottom: 30}}
+          numberOfTicks={5}
+          yAccessor= {({ item }) => item.fragments}
+          style={{marginBottom: 10}}
           contentInset={{top: 10, bottom: 10}}
-          svg={{fontSize: 10, fill: 'grey'}}
+          svg={{fontSize: 10, fill: 'black'}}
         />
         <View style={{ flex: 1, marginLeft: 10 }}>
-          <LineChart
+          <AreaChart
+            numberOfTicks={5}
             style={{ flex: 1 }}
+            yAccessor= {({ item }) => item.fragments}
             data={graph_data}
             contentInset={{top: 10, bottom: 10}}
-            svg={{ stroke: 'rgb(134, 65, 244)' }}
+            svg={{ fill: 'rgb(134, 65, 244)' }}
           >
             <Grid />
-          </LineChart>
+          </AreaChart>
           <XAxis
-            style={{ marginHorizontal: -10, height: 5}}
+            style={{ marginHorizontal: -10, height: 5, marginTop: 5}}
             data={graph_data}
-            formatLabel={(value, index) => index}
+            numberOfTicks={7}
+            xAccessor={({ item }) => item.day.getDay() }
+             formatLabel={(day) => {
+              switch(day) {
+                case 0: return 'SUN'
+                case 1: return'MON'
+                case 2: return 'TUE'
+                case 3: return 'WED'
+                case 4: return 'THU'
+                case 5: return 'FRI'
+                case 6: return 'SAT'
+              }
+            }}
             contentInset={{left: 10, right: 10}}
-            svg={{ fontSize: 10, fill: 'grey'}}
+            svg={{ fontSize: 10, fill: 'black'}}
             />
         </View>
       </View>
@@ -185,6 +237,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   graphcontainer: {
+    backgroundColor: 'rgba(255, 255, 255, 1)',
     margin: 20,
     padding: 20,
     height: 200,
