@@ -10,8 +10,8 @@ import DreamCard from './DreamCard';
     );
     render() {
       return (
-        <View style={{margin: 20, height: 150, borderWidth: 0.5, borderColor: this.props.color}}>
-          <Text style={{color: 'goldenrod', fontSize: 24}}>{this.props.title}</Text>
+        <View style={{margin: 20, height: 150, /*borderWidth: 0.5, borderColor: this.props.color*/}}>
+          <Text style={{color: '#c4941d', fontSize: 24}}>{this.props.title}</Text>
           <FlatList 
             horizontal={true} data={data}
             renderItem={this._renderItem}

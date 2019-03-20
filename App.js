@@ -8,7 +8,7 @@ export default class App extends React.Component {
   render() {
     const message = 'test';
     return (
-      <View style={{backgroundColor: 'midnightblue', flex: 1}}>
+      <View style={{backgroundColor: '#2b1381', flex: 1}}>
         <Toolbar title='DreamUp'/>
         <DreamDashboard />
       </View>
@@ -31,7 +31,7 @@ export class Toolbar extends Component {
 
 const styles = StyleSheet.create({
   toolbar: {
-    backgroundColor: "goldenrod",
+    backgroundColor: "#c4941d",
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',

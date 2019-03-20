@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "DreamUp-tvOS.app"
-               BlueprintName = "DreamUp-tvOS"
-               ReferencedContainer = "container:DreamUp.xcodeproj">
+               BuildableName = "dreamup-tvOS.app"
+               BlueprintName = "dreamup-tvOS"
+               ReferencedContainer = "container:dreamup.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "DreamUp-tvOSTests.xctest"
-               BlueprintName = "DreamUp-tvOSTests"
-               ReferencedContainer = "container:DreamUp.xcodeproj">
+               BuildableName = "dreamup-tvOSTests.xctest"
+               BlueprintName = "dreamup-tvOSTests"
+               ReferencedContainer = "container:dreamup.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "DreamUp-tvOSTests.xctest"
-               BlueprintName = "DreamUp-tvOSTests"
-               ReferencedContainer = "container:DreamUp.xcodeproj">
+               BuildableName = "dreamup-tvOSTests.xctest"
+               BlueprintName = "dreamup-tvOSTests"
+               ReferencedContainer = "container:dreamup.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "DreamUp-tvOS.app"
-            BlueprintName = "DreamUp-tvOS"
-            ReferencedContainer = "container:DreamUp.xcodeproj">
+            BuildableName = "dreamup-tvOS.app"
+            BlueprintName = "dreamup-tvOS"
+            ReferencedContainer = "container:dreamup.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "DreamUp-tvOS.app"
-            BlueprintName = "DreamUp-tvOS"
-            ReferencedContainer = "container:DreamUp.xcodeproj">
+            BuildableName = "dreamup-tvOS.app"
+            BlueprintName = "dreamup-tvOS"
+            ReferencedContainer = "container:dreamup.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "DreamUp-tvOS.app"
-            BlueprintName = "DreamUp-tvOS"
-            ReferencedContainer = "container:DreamUp.xcodeproj">
+            BuildableName = "dreamup-tvOS.app"
+            BlueprintName = "dreamup-tvOS"
+            ReferencedContainer = "container:dreamup.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

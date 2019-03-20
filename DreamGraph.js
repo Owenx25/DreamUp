@@ -3,14 +3,14 @@ import { View, StyleSheet } from 'react-native';
 import { LineChart, AreaChart, YAxis, XAxis, Grid } from 'react-native-svg-charts';
 
 // Graph of some data related to dreams
-const Gradient = () => (
-    <Defs key={'gradient'}>
-        <LinearGradient id={'gradient'} x1={'0%'} y={'0%'} x2={'100%'} y2={'0%'}>
-            <Stop offset={'0%'} stopColor={'rgb(134, 65, 244)'} stopOpacity={0.8}/>
-            <Stop offset={'100%'} stopColor={'rgb(134, 65, 244)'} stopOpacity={0.2}/>
-        </LinearGradient>
-    </Defs>
-  )
+// const Gradient = () => (
+//     <Defs key={'gradient'}>
+//         <LinearGradient id={'gradient'} x1={'0%'} y={'0%'} x2={'100%'} y2={'0%'}>
+//             <Stop offset={'0%'} stopColor={'rgb(134, 65, 244)'} stopOpacity={0.8}/>
+//             <Stop offset={'100%'} stopColor={'rgb(134, 65, 244)'} stopOpacity={0.2}/>
+//         </LinearGradient>
+//     </Defs>
+//   )
   export default class DreamGraph extends Component {
     render() {
       return (
@@ -30,7 +30,7 @@ const Gradient = () => (
               yAccessor= {({ item }) => item.fragments}
               data={graph_data}
               contentInset={{top: 10, bottom: 10}}
-              svg={{ fill: 'url(#gradient)' }}
+              svg={{ fill: '#b300b3' }}
             >
               <Grid />
             </AreaChart>

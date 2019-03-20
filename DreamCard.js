@@ -7,7 +7,7 @@ import { View, Text } from 'react-native';
 export default class DreamCard extends Component {
     render() {
       return (
-        <View style={{backgroundColor: 'goldenrod', width: 120, margin: 10, justifyContent: 'flex-end', alignItems: 'center'}}>
+        <View style={{backgroundColor: '#c4941d', width: 120, margin: 10, justifyContent: 'flex-end', alignItems: 'center'}}>
           <Text style={{fontSize:30}}>{this.props.date.getMonth() + 1}/{this.props.date.getDate()}</Text>
   
         </View>

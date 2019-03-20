@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FAB from 'react-native-fab'
 import {ScrollView, View} from 'react-native';
+import { Divider } from 'react-native-elements';
 
 import CardContainer from './CardContainer';
 import DreamGraph from './DreamGraph';
@@ -13,6 +14,7 @@ export default class DreamDashboard extends Component {
         <View style={{flex:10}} >
           <ScrollView>
             <CardContainer color='white' title='Recent Dreams'/>
+            <DashboardBorder />
             <CardContainer color='white' title='Nightmares'/>
             <DreamGraph
             />
@@ -27,3 +29,16 @@ export default class DreamDashboard extends Component {
       )
     }
   }
+
+class DashboardBorder extends Component {
+    render() {
+        return (
+            <View style={{flexDirection:'row', justifyContent:'center'}}>
+                <Divider style={{backgroundColor: '#b300b3',
+                    width: 50,
+                    height: 3, 
+                    flex: 0.5}}/>
+            </View>
+        )
+    }
+}
