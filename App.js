@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, FlatList, Text, View, Platform } from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation'
 
 import DreamDashboard from './DreamDashboard';
 
 export default class App extends React.Component {
   render() {
-    return (
-      <View style={{backgroundColor: '#2b1381', flex: 1, /*marginTop: getStatusBarHeight()*/}}>
+    return (  
+      <View style={{backgroundColor: '#2b1381', flex: 1}}>
         <Toolbar title='DreamUp'/>
         <DreamDashboard />
       </View>
@@ -33,6 +34,6 @@ const styles = StyleSheet.create({
     height: 60,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 5
+    marginBottom: 1
   },
 });

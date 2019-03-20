@@ -17,7 +17,7 @@ export default class DreamDashboard extends Component {
             <DashboardDivider />
             <CardContainer color='white' title='Nightmares'/>
             <DashboardDivider />
-            <DreamGraph
+            <DreamGraph name='Weekly Fragments'
             />
             <View style={{height: 100}}/>
           </ScrollView>
