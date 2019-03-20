@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-
-import { StyleSheet, FlatList, Text, View } from 'react-native';
+import { StyleSheet, FlatList, Text, View, Platform } from 'react-native';
 
 import DreamDashboard from './DreamDashboard';
 
 export default class App extends React.Component {
   render() {
-    const message = 'test';
     return (
-      <View style={{backgroundColor: '#2b1381', flex: 1}}>
+      <View style={{backgroundColor: '#2b1381', flex: 1, /*marginTop: getStatusBarHeight()*/}}>
         <Toolbar title='DreamUp'/>
         <DreamDashboard />
       </View>
@@ -17,11 +15,11 @@ export default class App extends React.Component {
 }
 
 // Holds various dream info containers
-export class Toolbar extends Component {
+class Toolbar extends Component {
   render() {
     return (
-      <View style={styles.toolbar}> 
-        <Text style={{fontWeight: 'bold', fontSize: 32, color: 'midnightblue'}}>
+      <View style={styles.toolbar}>
+        <Text style={{fontWeight: 'bold', fontSize: 28, color: 'midnightblue'}}>
           {this.props.title}
         </Text>
       </View>
@@ -32,8 +30,8 @@ export class Toolbar extends Component {
 const styles = StyleSheet.create({
   toolbar: {
     backgroundColor: "#c4941d",
-    flex: 1,
-    justifyContent: 'flex-end',
+    height: 60,
+    justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 5
   },
