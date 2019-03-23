@@ -10,7 +10,7 @@ export default class DreamCard extends Component {
       return (
         <TouchableOpacity 
           style={{backgroundColor: '#c4941d', width: 120, margin: 10, justifyContent: 'flex-end', alignItems: 'center'}}
-          onPress={() => this.props.navigation.navigate('DreamScreen')}
+          onPress={() => this.props.navigation.push('DreamScreen')}
         >
           <Text style={{fontSize:30}}>{this.props.date.getMonth() + 1}/{this.props.date.getDate()}</Text>
         </TouchableOpacity>

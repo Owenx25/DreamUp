@@ -23,7 +23,7 @@ export default class DreamDashboard extends Component {
           </ScrollView>
           <FAB buttonColor="#DAA520"
             iconTextColor="white"
-            onClickAction={() => {console.log("FAB pressed")}}
+            onClickAction={() => {this.props.navigation.navigate('VisionCanvas')}}
             visible={true}
           />
         </View>

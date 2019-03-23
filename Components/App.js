@@ -4,6 +4,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation'
 
 import DreamDashboard from './DreamDashboard';
 import DreamScreen from './DreamScreen';
+import VisionCanvas from './VisionCanvas';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -24,7 +25,8 @@ class HomeScreen extends React.Component {
 
 const RootStack = createStackNavigator({
   Home: HomeScreen,
-  DreamScreen: DreamScreen 
+  DreamScreen: DreamScreen,
+  VisionCanvas: VisionCanvas
 },
 {
   defaultRoot: 'Home'
