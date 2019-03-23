@@ -13,9 +13,9 @@ export default class DreamDashboard extends Component {
       return (
         <View style={{flex:10}} >
           <ScrollView>
-            <CardContainer color='white' title='Recent Dreams'/>
+            <CardContainer color='white' title='Recent Dreams' navigation={this.props.navigation}/>
             <DashboardDivider />
-            <CardContainer color='white' title='Nightmares'/>
+            <CardContainer color='white' title='Nightmares' navigation={this.props.navigation}/>
             <DashboardDivider />
             <DreamGraph name='Weekly Fragments'
             />

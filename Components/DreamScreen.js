@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import FAB from 'react-native-fab'
-import { ScrollView, View } from 'react-native';
-import { Divider } from 'react-native-elements';
+import { View, Text } from 'react-native';
 
-import CardContainer from './CardContainer';
-import DreamGraph from './DreamGraph';
-
-export default class DreamScreen {
+export default class DreamScreen extends Component {
     render() {
         return (
-            <View />
+            <View style={{backgroundColor: 'green', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>This is a Dream Screen</Text>
+            </View>
         )
     }
+
 }
