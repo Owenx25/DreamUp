@@ -6,11 +6,10 @@ import { TouchableOpacity, Text, Button } from 'react-native';
 //#56399d
 export default class DreamCard extends Component {  
     render() {
-      const title = `${this.props.date.getMonth() + 1}/${this.props.date.getDate()}`;
       return (
         <TouchableOpacity 
           style={{backgroundColor: '#c4941d', width: 120, margin: 10, justifyContent: 'flex-end', alignItems: 'center'}}
-          onPress={() => this.props.navigation.push('DreamScreen')}
+          onPress={() => this.props.navigation.push('DreamScreen', {dreamId: this.props.dreamId})}
         >
           <Text style={{fontSize:30}}>{this.props.date.getMonth() + 1}/{this.props.date.getDate()}</Text>
         </TouchableOpacity>

@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, View, Text, Alert } from 'react-native';
 
 import RNSketchCanvas from '@terrylinla/react-native-sketch-canvas'
+import HeaderCheckIcon from './HeaderCheckIcon';
 
 export default class VisionCanvas extends Component {
     static navigationOptions = {
-        title: 'New Dream',
+        title: 'What did you see?',
         headerStyle: {
           backgroundColor: '#c4941d'
-        }
+        },
+        //headerRight: <HeaderCheckIcon />
       };
+
     render() {
         return (
             <View style={styles.container}>
@@ -19,7 +22,6 @@ export default class VisionCanvas extends Component {
                   canvasStyle={{ backgroundColor: 'transparent', flex: 1 }}
                   defaultStrokeIndex={0}
                   defaultStrokeWidth={5}
-                  closeComponent={<View style={styles.functionButton}><Text style={{color: 'white'}}>Close</Text></View>}
                   undoComponent={<View style={styles.functionButton}><Text style={{color: 'white'}}>Undo</Text></View>}
                   clearComponent={<View style={styles.functionButton}><Text style={{color: 'white'}}>Clear</Text></View>}
                   eraseComponent={<View style={styles.functionButton}><Text style={{color: 'white'}}>Eraser</Text></View>}
@@ -39,14 +41,26 @@ export default class VisionCanvas extends Component {
                       }} />
                     </View>
                   )}}
-                  saveComponent={<View style={styles.functionButton}><Text style={{color: 'white'}}>Save</Text></View>}
+                  saveComponent={<View style={[styles.functionButton, {backgroundColor: '#b300b3'}]}><Text style={{color: 'white'}}>Save</Text></View>}
                   savePreference={() => {
                     return {
-                      folder: 'RNSketchCanvas',
+                      folder: 'Dreams',
                       filename: String(Math.ceil(Math.random() * 100000000)),
                       transparent: false,
-                      imageType: 'png'
+                      includeImage: false,
+                      includeText: false,
+                      cropToImageSize: false,
+                      imageType: 'jpg',
                     }
+                  }}
+                  onSketchSaved={(success, path) => {
+                      // on Success, send path with nav to a new DreamScreen
+                      // on Fail, provide message and don't do anything
+                      if (success) {
+                          this.props.navigation.navigate("DreamScreen", {visionPath: path, existing: false});
+                      } else {
+                        Alert.alert('ERROR','Failed to save image!');
+                      }
                   }}
                 />
               </View>
@@ -72,4 +86,4 @@ export default class VisionCanvas extends Component {
         }
       });
        
-      AppRegistry.registerComponent('example', () => example);
+      AppRegistry.registerComponent('VisionCanvas', () => VisionCanvas);
