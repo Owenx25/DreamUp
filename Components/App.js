@@ -5,13 +5,11 @@ import { createStackNavigator, createAppContainer } from 'react-navigation'
 import DreamDashboard from './DreamDashboard';
 import DreamScreen from './DreamScreen';
 import VisionCanvas from './VisionCanvas';
+import DreamFragmentScreen from './DreamFragmentScreen';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'DreamUp',
-    headerStyle: {
-      backgroundColor: '#c4941d'
-    }
+    title: 'DreamUp'
   };
   render() {  
     return ( 
@@ -24,12 +22,18 @@ class HomeScreen extends React.Component {
 }
 
 const RootStack = createStackNavigator({
-  Home: HomeScreen,
+  Home: DreamFragmentScreen,
   DreamScreen: DreamScreen,
-  VisionCanvas: VisionCanvas
+  VisionCanvas: VisionCanvas,
+  DreamFragmentScreen: DreamFragmentScreen
 },
 {
-  defaultRoot: 'Home'
+  defaultRoot: 'Home',
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: '#c4941d'
+    }
+  }
 });
 
 const AppContainer = createAppContainer(RootStack);

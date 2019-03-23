@@ -11,5 +11,4 @@ export default class DreamScreen extends Component {
             </View>
         )
     }
-
 }

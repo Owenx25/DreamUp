@@ -7,9 +7,6 @@ import HeaderCheckIcon from './HeaderCheckIcon';
 export default class VisionCanvas extends Component {
     static navigationOptions = {
         title: 'What did you see?',
-        headerStyle: {
-          backgroundColor: '#c4941d'
-        },
         //headerRight: <HeaderCheckIcon />
       };
 
@@ -57,7 +54,7 @@ export default class VisionCanvas extends Component {
                       // on Success, send path with nav to a new DreamScreen
                       // on Fail, provide message and don't do anything
                       if (success) {
-                          this.props.navigation.navigate("DreamScreen", {visionPath: path, existing: false});
+                          this.props.navigation.navigate("DreamFragmentScreen", {visionPath: path, existing: false});
                       } else {
                         Alert.alert('ERROR','Failed to save image!');
                       }
