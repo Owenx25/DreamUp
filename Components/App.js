@@ -6,10 +6,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 import DreamDashboard from './DreamDashboard';
+import DreamScreen from './DreamScreen';
+import VisionCanvas from './VisionCanvas';
+import DreamFragmentScreen from './DreamFragmentScreen';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'DreamUp Experiment',
+    title: 'DreamUp',
         headerTitleStyle: {
             textAlign:"center",
             flex:1
@@ -29,7 +32,7 @@ class HomeScreen extends React.Component {
     return ( 
       <View style={{backgroundColor: '#2b1381', flex: 1}}>
         {/* <Toolbar title='DreamUp'/> */}
-        <DreamDashboard />
+        <DreamDashboard navigation={this.props.navigation}/>
       </View>
     );
   }
@@ -37,10 +40,17 @@ class HomeScreen extends React.Component {
 
 const RootStack = createStackNavigator({
   Home: HomeScreen,
-  // Dream: DreamScreen 
+  DreamScreen: DreamScreen,
+  VisionCanvas: VisionCanvas,
+  DreamFragmentScreen: DreamFragmentScreen
 },
 {
-  defaultRoot: 'Home'
+  defaultRoot: 'Home',
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: '#c4941d'
+    }
+  }
 });
 
 const AppContainer = createAppContainer(RootStack);
@@ -50,25 +60,3 @@ export default class App extends React.Component {
     return <AppContainer />;
   }
 }
-
-// Holds various dream info containers
-// class Toolbar extends Component {
-//   render() {
-//     return (
-//       <View style={styles.toolbar}>
-//         <Text style={{fontWeight: 'bold', fontSize: 28, color: 'midnightblue'}}>
-//           {this.props.title}
-//         </Text>
-//       </View>
-//     )
-//   }
-// }
-// const styles = StyleSheet.create({
-//   toolbar: {
-//     backgroundColor: "#c4941d",
-//     height: 60,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     marginBottom: 1
-//   },
-// });

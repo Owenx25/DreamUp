@@ -6,13 +6,13 @@ import DreamCard from './DreamCard';
   // Holds Cards relating to specific day
   export default class CardContainer extends Component {
     _renderItem = ({item}) => (
-      <DreamCard date={item.date}/>
+      <DreamCard date={item.date} dreamId={item.dreamId} navigation={this.props.navigation}/>
     );
     render() {
       return (
         <View style={{margin: 20, height: 150, /*borderWidth: 0.5, borderColor: this.props.color*/}}>
           <Text style={{color: '#c4941d', fontSize: 24}}>{this.props.title}</Text>
-          <FlatList 
+          <FlatList
             horizontal={true} data={data}
             renderItem={this._renderItem}
             keyExtractor={(item, index) => index.toString()}
@@ -25,7 +25,7 @@ import DreamCard from './DreamCard';
   // Sample data for flat list
 const data = [
     {
-      Id: 1,
+      dreamId: 1,
       date: new Date(),
       fragments: [
         'My family was celebrating my birthday',
@@ -36,7 +36,7 @@ const data = [
       vision: 'path to image'
     },
     {
-      Id: 1,
+      dreamId: 2,
       date: new Date(),
       fragments: [
         'My family was celebrating my birthday',
@@ -47,7 +47,7 @@ const data = [
       vision: 'path to image'
     },
     {
-      id: 1,
+      dreamId: 3,
       date: new Date(),
       fragments: [
         'My family was celebrating my birthday',
@@ -58,7 +58,7 @@ const data = [
       vision: 'path to image'
     },
     {
-      id: 1,
+      dreamId: 4,
       date: new Date(),
       fragments: [
         'My family was celebrating my birthday',
