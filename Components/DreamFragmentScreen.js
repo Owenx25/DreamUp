@@ -13,6 +13,8 @@ export default class DreamFragmentScreen extends Component {
             newFragment: '',
             completedFragmentsArr: [],
             deleteFragmentModalVisible: false,
+            errorEmptyModalVisible: false,
+            errorLongModalVisible: false,
             selectedFragment: 0,
         }
     }
@@ -21,13 +23,21 @@ export default class DreamFragmentScreen extends Component {
         this.setState({deleteFragmentModalVisible: visible});
     }
 
+    setErrorEmptyModalVisible(visible) {
+        this.setState({errorEmptyModalVisible: visible});
+    }
+
+    setErrorLongModalVisible(visible) {
+        this.setState({errorLongModalVisible: visible});
+    }
+
     _onAddFragment() {
         if (this.state.newFragment.length == 0) {
-            Alert.alert('ERROR', 'Fragment needs text');
+            this.setErrorEmptyModalVisible(!this.state.errorEmptyModalVisible);
             return;
         }
         if (this.state.newFragment.length > 140) {
-            Alert.alert('ERROR', 'Fragment is too long, you can add a more detailed summary later');
+            this.setErrorLongModalVisible(!this.state.errorEmptyModalVisible);
             return;
         }
         this.state.completedFragmentsArr.push(this.state.newFragment);
@@ -64,6 +74,16 @@ export default class DreamFragmentScreen extends Component {
 
         return (
             <View style={{backgroundColor: '#2b1381', flex: 1, flexDirection: 'column', justifyContent: 'flex-start'}}>
+                <ErrorDialog
+                    isModalVisible={this.state.errorEmptyModalVisible}
+                    message='Fragment needs text!'
+                    onPress={() => {this.setErrorEmptyModalVisible(!this.state.errorEmptyModalVisible)}}
+                />
+                <ErrorDialog
+                    isModalVisible={this.state.errorLongModalVisible}
+                    message='Fragment is too long, you can add a more detailed summary later'
+                    onPress={() => {this.setErrorLongModalVisible(!this.state.errorLongModalVisible)}}
+                />
                 <ChoiceDialog
                     isModalVisible={this.state.deleteFragmentModalVisible}
                     message='Delete this fragment?'

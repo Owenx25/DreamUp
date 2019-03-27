@@ -13,9 +13,9 @@ export default class ErrorDialog extends Component {
                     <View style={styles.dialogBox}>
                         <Text style={styles.messageText}>{this.props.message}</Text>
                         <View style={styles.button}> 
-                            <TouchableOpacity onPress={this.props.onRChoice}>
-                                <View style={styles.ebutton}>
-                                    <Text style={{fontSize: 20, color: '#2b1381'}}>{this.props.rChoice}</Text>
+                            <TouchableOpacity onPress={this.props.onPress}>
+                                <View style={styles.eButton}>
+                                    <Text style={{fontSize: 20, paddingBottom: 10, color: 'white'}}>OK</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -33,14 +33,13 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: '#c4941d',
+        backgroundColor: '#B30000',
         borderColor:'black',
         borderWidth: 2,
         borderRadius: 5,
     },
     buttons: {
         width: 250,
-        marginBottom: 20,
         justifyContent: 'space-between',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -50,11 +49,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 30,
         width: 60,
-        backgroundColor: '#c4941d'
+        backgroundColor: '#B30000'
     },
     messageText: {
-        marginTop: 5,
+        margin: 10,
         fontSize: 20,
-        color: '#2b1381'
+        color: 'white'
     }
 })
