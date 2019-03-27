@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { Button } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 import DreamDashboard from './DreamDashboard';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'DreamUp',
+    title: 'DreamUp Experiment',
+        headerTitleStyle: {
+            textAlign:"center",
+            flex:1
+        },
+    headerRight: (
+                       <Icon
+                         onPress={() => alert('This is a button!')}
+                         name="arrow-right"
+                         color="##fff"
+                       />
+                     ),
     headerStyle: {
       backgroundColor: '#c4941d'
     }
