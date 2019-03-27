@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import  {View, StyleSheet, Text, ScrollView, Alert, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, ScrollView, TouchableOpacity} from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 import DashboardDivider from './DashboardDivider';
 import DreamFragmentInput from './DreamFragmentInput';
 import ChoiceDialog from './ChoiceDialog';
 import ErrorDialog from './ErrorDialog';
+import HeaderCheckIcon from './HeaderCheckIcon';
 
-export default class DreamFragmentScreen extends Component {
+class DreamFragmentScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -55,10 +57,26 @@ export default class DreamFragmentScreen extends Component {
         this.setModalVisible(!this.state.deleteFragmentModalVisible);
     }
 
-    static navigationOptions = {
+    componentDidMount() {
+        this.props.navigation.setParams({
+            getFragmentCount: () => this.getFragmentCount()
+        })
+    }
+
+    getFragmentCount() {
+        return this.state.completedFragmentsArr.length;
+    }
+
+    static navigationOptions = ({ navigation }) => {
+        const {params = {}} = navigation.state;
+        return {
         title: 'What happened?',
-        //headerRight: <HeaderCheckIcon />
+        headerRight: <HeaderCheckIcon onDone={() => {
+            if (params.getFragmentCount() > 0)
+                navigation.navigate('DreamScreen')}
+        } />
       };
+    };
     render() {
         let fragmentArr = this.state.completedFragmentsArr.map((text, index) => {
             return (
@@ -124,3 +142,5 @@ const styles = StyleSheet.create({
         backgroundColor:'#c4941d',
     }
 })
+
+export default withNavigation(DreamFragmentScreen);
