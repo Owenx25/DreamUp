@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 export default class HeaderCheckIcon extends Component {
     render() {
         return (
-            <Icon style={{marginRight: 20}} name='done' size={24} color='#000'/>
+            <TouchableOpacity onPress={this.props.onDone}>
+                <Icon style={{marginRight: 20}} name='done' size={24} color='#000'/>
+            </TouchableOpacity>
         )
     }
 }
