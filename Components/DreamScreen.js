@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { AppRegistry, View, Text } from 'react-native';
 
 export default class DreamScreen extends Component {
     render() {
@@ -12,3 +12,6 @@ export default class DreamScreen extends Component {
         )
     }
 }
+
+
+      //AppRegistry.registerComponent('DreamScreen', () => DreamScreen);
