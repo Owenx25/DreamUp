@@ -6,10 +6,26 @@ import DashboardDivider from './DashboardDivider'
 import DreamFragment from './DreamFragment';
 
 export default class DreamScreen extends Component {
+
+    static formatDate(date) {
+        var monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+          ];
+        
+          var day = date.getDate();
+          var monthIndex = date.getMonth();
+          var year = date.getFullYear();
+        
+          return day + ' ' + monthNames[monthIndex] + ' ' + year;
+    }
+
     static navigationOptions = ({ navigation }) => {
         const {params = {}} = navigation.state;
         return {
-        title: navigation.getParam('createDate', 'Dream from ???').toString(),
+        title: 'Dream from ' + DreamScreen.formatDate(navigation.getParam('createDate', 'Dream from ???')),
         headerRight: <HeaderEditIcon onDone={() => {
             // make DreamScreen editable
         }}

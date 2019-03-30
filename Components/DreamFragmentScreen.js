@@ -43,8 +43,7 @@ class DreamFragmentScreen extends Component {
             this.setErrorLongModalVisible(!this.state.errorEmptyModalVisible);
             return;
         }
-        this.state.completedFragmentsArr.push(this.state.newFragment);
-        this.setState({ completedFragments: this.state.completedFragmentsArr });
+        this.setState({ completedFragmentsArr: [...this.state.completedFragmentsArr, this.state.newFragment] });
     }
 
     _onFragmentPress(index) {
@@ -53,8 +52,9 @@ class DreamFragmentScreen extends Component {
     }
 
     _onRemoveFragmentPress() {
-        this.state.completedFragmentsArr.splice(this.state.selectedFragment, 1);
-        this.setState({completedFragmentsArr: this.state.completedFragmentsArr});
+        var fragmentsArr = [...this.state.completedFragmentsArr]
+        fragmentsArr.splice(this.state.selectedFragment, 1);
+        this.setState({completedFragmentsArr: fragmentsArr});
         this.setModalVisible(!this.state.deleteFragmentModalVisible);
     }
 
