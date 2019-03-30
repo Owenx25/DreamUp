@@ -8,6 +8,9 @@ import DreamFragment from './DreamFragment';
 export default class DreamScreen extends Component {
 
     static formatDate(date) {
+        if (typeof date == "string") {
+            return '';
+        }
         var monthNames = [
             "January", "February", "March",
             "April", "May", "June", "July",
@@ -33,10 +36,7 @@ export default class DreamScreen extends Component {
       };
     };
 
-    _renderFragmentItem(item) {
-        <DreamFragment onPress={() => {}} text={item} />
-    }
-
+    _renderFragmentItem = ({item}) => (<DreamFragment onPress={() => {}} text={item} />)
 
     /*
         navigation params:
@@ -58,7 +58,7 @@ export default class DreamScreen extends Component {
                     </View>
                     <DashboardDivider/>
                     <View style={{margin: 20}}>
-                        <Text style={{color: '#c4941d', fontSize: 20, marginBottom: 10}}>Fragments</Text>
+                        <Text style={{color: '#c4941d', fontSize: 20}}>Fragments</Text>
                         <View style={{alignItems: 'center'}}>
                             <FlatList
                                 data={testFragments}
