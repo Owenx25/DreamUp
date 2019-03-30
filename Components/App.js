@@ -42,7 +42,6 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View style={{backgroundColor: '#2b1381', flex: 1}}>
-        {/* <Toolbar title='DreamUp'/> */}
         <DreamDashboard navigation={this.props.navigation}/>
       </View>
     );

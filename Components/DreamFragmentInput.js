@@ -6,7 +6,10 @@ export default class DreamFragmentInput extends Component {
     render() {
         return (
             <View style={styles.addFragmentBox}>
-                <TouchableOpacity onPress={this.props.onAddFragmentPress}>
+                <TouchableOpacity onPress={() => {
+                    this.props.onAddFragmentPress();
+                    this.TextInput.clear();
+                }}>
                     <Icon style={{}} name='add-circle' size={40} color='#b300b3'/>
                 </TouchableOpacity>
                 <TextInput
@@ -15,6 +18,7 @@ export default class DreamFragmentInput extends Component {
                     placeholderTextColor='#5A5A5A' 
                     placeholder="what happened..."
                     multiline={true} 
+                    ref={input => {this.TextInput = input}}
                 >
                 </TextInput>
             </View>

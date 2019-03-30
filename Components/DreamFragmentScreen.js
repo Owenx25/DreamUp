@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, Text, ScrollView, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, FlatList} from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import DashboardDivider from './DashboardDivider';
@@ -7,6 +7,7 @@ import DreamFragmentInput from './DreamFragmentInput';
 import ChoiceDialog from './ChoiceDialog';
 import ErrorDialog from './ErrorDialog';
 import HeaderCheckIcon from './HeaderCheckIcon';
+import DreamFragment from './DreamFragment';
 
 class DreamFragmentScreen extends Component {
     constructor(props) {
@@ -67,29 +68,25 @@ class DreamFragmentScreen extends Component {
         return this.state.completedFragmentsArr.length;
     }
 
+    _renderFragmentItem(item, index) {
+        return (
+            <DreamFragment onPress={() => this._onFragmentPress(index)} text={item} />
+        )
+    }
+
     static navigationOptions = ({ navigation }) => {
         const {params = {}} = navigation.state;
         return {
         title: 'What happened?',
         headerRight: <HeaderCheckIcon onDone={() => {
             if (params.getFragmentCount() > 0)
-                navigation.navigate('DreamScreen')}
+                navigation.navigate('DreamScreen', {
+                    createDate: new Date(),
+                })}
         } />
       };
     };
     render() {
-        let fragmentArr = this.state.completedFragmentsArr.map((text, index) => {
-            return (
-                <TouchableOpacity
-                    key={index}
-                    style={styles.fragmentBox}
-                    onPress={() => this._onFragmentPress(index)}
-                >
-                    <Text style={{fontSize: 16, color: 'black', padding: 10}}>{text}</Text>
-                </TouchableOpacity>
-            )
-        })
-
         return (
             <View style={{backgroundColor: '#2b1381', flex: 1, flexDirection: 'column', justifyContent: 'flex-start'}}>
                 <ErrorDialog
@@ -118,9 +115,11 @@ class DreamFragmentScreen extends Component {
                     onChangeText={(text) => this.setState({newFragment: text})}
                 />
                 <DashboardDivider />
-                <ScrollView style={{flex: 1}}>
-                    { fragmentArr }
-                </ScrollView>
+                <FlatList 
+                    data={this.state.completedFragmentsArr}
+                    renderItem={({item, index}) => this._renderFragmentItem(item, index)}
+                    keyExtractor={(item, index) => index.toString()}
+                />
             </View>
         )
     }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, View, Text, Alert } from 'react-native';
 
 import RNSketchCanvas from '@terrylinla/react-native-sketch-canvas'
-import HeaderCheckIcon from './HeaderCheckIcon';
 
 export default class VisionCanvas extends Component {
     static navigationOptions = {
