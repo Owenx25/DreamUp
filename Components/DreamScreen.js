@@ -145,12 +145,12 @@ export default class DreamScreen extends Component {
                     <View style={{margin: 20}}>
                         <Text style={{color: '#c4941d', fontSize: 24}}>Full Description</Text>
                         <View style={{marginTop: 20, flex: 1}}>
-                            <TextInput 
+                            <TextInput
+                                editable={!this.state.isReadOnly}
                                 style={styles.descriptionBox} 
                                 onChangeText={(descriptionText) => this.setState({descriptionText})}
                                 placeholder={'Add more detail about your dream...'}
                                 value={this.state.descriptionText}
-                                editable={true}
                                 multiline={true}
                             />
                         </View>
