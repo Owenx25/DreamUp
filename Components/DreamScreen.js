@@ -5,6 +5,7 @@ import HeaderEditIcon from './HeaderEditIcon'
 import DashboardDivider from './DashboardDivider'
 import DreamFragment from './DreamFragment';
 import DreamTag from './DreamTag';
+import HeaderCheckIcon from './HeaderCheckIcon';
 
 export default class DreamScreen extends Component {
     static formatDate(date) {
@@ -34,14 +35,26 @@ export default class DreamScreen extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.navigation.setParams({
+            // Need to set this when changing state
+            isReadOnly: true,
+            setReadOnly: this._setReadOnly,
+        })
+    }
+
+    _setReadOnly = (value) => {
+        this.props.navigation.setParams({ isReadOnly: value});
+        this.setState({ isReadOnly: value});
+    }
+
     static navigationOptions = ({ navigation }) => {
         const {params = {}} = navigation.state;
         return {
         title: 'Dream from ' + DreamScreen.formatDate(navigation.getParam('createDate', 'Dream from ???')),
-        headerRight: <HeaderEditIcon onDone={() => {
-            // make DreamScreen editable
-        }}
-            />
+        headerRight: params.isReadOnly ? 
+            <HeaderEditIcon onPress={() => params.setReadOnly(false)}/> :
+            <HeaderCheckIcon onDone={() => params.setReadOnly(true)}/>
       };
     };
 
@@ -49,13 +62,13 @@ export default class DreamScreen extends Component {
     _renderTagItem = ({item}) => (<DreamTag onPress={() => {}} text={item}/>);
     getReaction(reaction) {
         switch(reaction) {
-            case 'happy': return '😃';
-            case 'sad': return '😥';
-            case 'angry': return '😡';
-            case 'confused': return '🤔';
+            case 'happy':       return '😃';
+            case 'sad':         return '😥';
+            case 'angry':       return '😡';
+            case 'confused':    return '🤔';
             case 'indifferent': return '😐';
-            case 'suprised': return '🤯';
-            case 'afraid': return '😱'
+            case 'suprised':    return '🤯';
+            case 'afraid':      return '😱';
         }
     }
     /*
