@@ -16,12 +16,17 @@ class DreamFragmentScreen extends Component {
             newFragment: '',
             completedFragmentsArr: [],
             deleteFragmentModalVisible: false,
+            errorEmptySubmitModalVisible: false,
             selectedFragment: 0,
         }
     }
 
     setModalVisible(visible) {
         this.setState({deleteFragmentModalVisible: visible});
+    }
+
+    setErrorEmptySubmitModalVisible(visible) {
+        this.setState({errorEmptySubmitModalVisible: visible})
     }
 
     _onAddFragment(fragment) {
@@ -42,9 +47,16 @@ class DreamFragmentScreen extends Component {
         this.setModalVisible(!this.state.deleteFragmentModalVisible);
     }
 
+    _setErrorEmptySubmitModalVisible = (value) => {
+        this.props.navigation.setParams({errorEmptySubmitModalVisible: value});
+        this.setState({ errorEmptySubmitModalVisible: value});
+    }
+
     componentDidMount() {
         this.props.navigation.setParams({
-            getFragmentCount: () => this.getFragmentCount()
+            getFragmentCount: () => this.getFragmentCount(),
+            errorEmptySubmitModalVisible: false,
+            setErrorEmptySubmitModalVisible: this._setErrorEmptySubmitModalVisible,
         })
     }
 
@@ -63,17 +75,26 @@ class DreamFragmentScreen extends Component {
         return {
         title: 'What happened?',
         headerRight: <HeaderCheckIcon onDone={() => {
-            if (params.getFragmentCount() > 0)
+            if (params.getFragmentCount() > 0) {
                 navigation.navigate('DreamScreen', {
                     visionPath: navigation.getParam('visionPath', ''),
                     createDate: new Date(),
-                })}
+                })
+            } else {
+                params.setErrorEmptySubmitModalVisible(true)
+            }
+        }
         } />
       };
     };
     render() {
         return (
             <View style={{backgroundColor: '#2b1381', flex: 1, flexDirection: 'column', justifyContent: 'flex-start'}}>
+                <ErrorDialog
+                    isModalVisible={this.state.errorEmptySubmitModalVisible}
+                    message='You need at least one fragment!'
+                    onPress={() => this.setErrorEmptySubmitModalVisible(!this.state.errorEmptySubmitModalVisible)}
+                />
                 <ChoiceDialog
                     isModalVisible={this.state.deleteFragmentModalVisible}
                     message='Delete this fragment?'

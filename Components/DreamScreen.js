@@ -48,6 +48,7 @@ export default class DreamScreen extends Component {
     }
 
     _setReadOnly = (value) => {
+        // Need logic for saving to DB here
         this.props.navigation.setParams({ isReadOnly: value});
         this.setState({ isReadOnly: value});
     }
@@ -103,15 +104,6 @@ export default class DreamScreen extends Component {
         ? reaction - string
         visionPath - string
         existing - bool
-
-        reaction emojis:
-        Happy -         😃 
-        Sad -           😥
-        Angry -         😡 
-        Confused -      🤔
-        Indifferent -   😐
-        Suprised -      🤯
-        Afraid -        😱
     */
     render() {
         return (
