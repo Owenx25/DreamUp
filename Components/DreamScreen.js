@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, FlatList, TextInput } from 'react-native';
 
 import HeaderEditIcon from './HeaderEditIcon'
 import DashboardDivider from './DashboardDivider'
@@ -29,6 +29,8 @@ export default class DreamScreen extends Component {
         super(props)
         this.state = {
             isReadOnly: true,
+            descriptionText: '',
+            reaction: 'confused'
         }
     }
 
@@ -45,7 +47,17 @@ export default class DreamScreen extends Component {
 
     _renderFragmentItem = ({item}) => (<DreamFragment onPress={() => {}} text={item} />);
     _renderTagItem = ({item}) => (<DreamTag onPress={() => {}} text={item}/>);
-
+    getReaction(reaction) {
+        switch(reaction) {
+            case 'happy': return '😃';
+            case 'sad': return '😥';
+            case 'angry': return '😡';
+            case 'confused': return '🤔';
+            case 'indifferent': return '😐';
+            case 'suprised': return '🤯';
+            case 'afraid': return '😱'
+        }
+    }
     /*
         navigation params:
         dreamId - int
@@ -55,13 +67,13 @@ export default class DreamScreen extends Component {
         existing - bool
 
         reaction emojis:
-        Happy - 😃 
-        Sad - 😥
-        Angry - 😡 
-        Confused - 🤔
-        Indifferent - 😐
-        Suprised - 🤯
-        Afraid - 😱
+        Happy -         😃 
+        Sad -           😥
+        Angry -         😡 
+        Confused -      🤔
+        Indifferent -   😐
+        Suprised -      🤯
+        Afraid -        😱
     */
     render() {
         return (
@@ -88,23 +100,35 @@ export default class DreamScreen extends Component {
                     <View style={{margin: 20}}>
                         <Text style={{color: '#c4941d', fontSize: 24}}>Tags</Text>
                         <View style={{alignItems: 'flex-start'}}>
-                            <ScrollView>
-                                <FlatList
-                                    numColumns={1}
-                                    data={testTags}
-                                    renderItem={this._renderTagItem}
-                                    keyExtractor={(item, index) => index.toString()}
-                                />
-                            </ScrollView>
+                            <FlatList
+                                numColumns={1}
+                                horizontal={true}
+                                data={testTags}
+                                renderItem={this._renderTagItem}
+                                keyExtractor={(item, index) => index.toString()}
+                            />
                         </View>
                     </View>
                     <DashboardDivider/>
                     <View style={{margin: 20}}>
                         <Text style={{color: '#c4941d', fontSize: 24}}>Reaction</Text>
+                        <View style={{alignItems: 'center'}}>
+                            <Text style={{fontSize: 70}}>{this.getReaction(this.state.reaction)}</Text>
+                        </View>
                     </View>
                     <DashboardDivider/>
                     <View style={{margin: 20}}>
                         <Text style={{color: '#c4941d', fontSize: 24}}>Full Description</Text>
+                        <View style={{marginTop: 20, flex: 1}}>
+                            <TextInput 
+                                style={styles.descriptionBox} 
+                                onChangeText={(descriptionText) => this.setState({descriptionText})}
+                                placeholder={'Add more detail about your dream...'}
+                                value={this.state.descriptionText}
+                                editable={true}
+                                multiline={true}
+                            />
+                        </View>
                     </View>
                 </ScrollView>
             </View>
@@ -126,13 +150,10 @@ const testTags = [
 ]
 
 const styles = StyleSheet.create({
-    tagsBox: {
-        margin: 20,
-    },
-    reactionBox: {
-        margin: 20,
-    },
     descriptionBox: {
-        margin: 20,
+        flex: 1,
+        padding: 10,
+        fontSize: 16,
+        backgroundColor:'#c4941d'
     },
 })

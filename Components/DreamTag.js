@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     fragmentBox: {
         flex: 1,
         justifyContent: 'center',
-        marginHorizontal: 20,
+        marginLeft: 10,
         marginTop: 20,
         backgroundColor:'#c4941d',
     }
