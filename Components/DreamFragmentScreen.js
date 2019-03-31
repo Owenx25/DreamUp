@@ -16,8 +16,6 @@ class DreamFragmentScreen extends Component {
             newFragment: '',
             completedFragmentsArr: [],
             deleteFragmentModalVisible: false,
-            errorEmptyModalVisible: false,
-            errorLongModalVisible: false,
             selectedFragment: 0,
         }
     }
@@ -26,24 +24,10 @@ class DreamFragmentScreen extends Component {
         this.setState({deleteFragmentModalVisible: visible});
     }
 
-    setErrorEmptyModalVisible(visible) {
-        this.setState({errorEmptyModalVisible: visible});
-    }
-
-    setErrorLongModalVisible(visible) {
-        this.setState({errorLongModalVisible: visible});
-    }
-
-    _onAddFragment() {
-        if (this.state.newFragment.length == 0) {
-            this.setErrorEmptyModalVisible(!this.state.errorEmptyModalVisible);
-            return;
-        }
-        if (this.state.newFragment.length > 140) {
-            this.setErrorLongModalVisible(!this.state.errorEmptyModalVisible);
-            return;
-        }
-        this.setState({ completedFragmentsArr: [...this.state.completedFragmentsArr, this.state.newFragment] });
+    _onAddFragment(fragment) {
+        let completedFragmentsArr = [...this.state.completedFragmentsArr];
+        completedFragmentsArr.push(fragment);
+        this.setState({ completedFragmentsArr });
     }
 
     _onFragmentPress(index) {
@@ -89,16 +73,6 @@ class DreamFragmentScreen extends Component {
     render() {
         return (
             <View style={{backgroundColor: '#2b1381', flex: 1, flexDirection: 'column', justifyContent: 'flex-start'}}>
-                <ErrorDialog
-                    isModalVisible={this.state.errorEmptyModalVisible}
-                    message='Fragment needs text!'
-                    onPress={() => {this.setErrorEmptyModalVisible(!this.state.errorEmptyModalVisible)}}
-                />
-                <ErrorDialog
-                    isModalVisible={this.state.errorLongModalVisible}
-                    message='Fragment is too long, you can add a more detailed summary later'
-                    onPress={() => {this.setErrorLongModalVisible(!this.state.errorLongModalVisible)}}
-                />
                 <ChoiceDialog
                     isModalVisible={this.state.deleteFragmentModalVisible}
                     message='Delete this fragment?'
@@ -110,10 +84,7 @@ class DreamFragmentScreen extends Component {
                 <Text style={styles.titleText}>Add some sentence fragments from your dream:</Text>
                 <Text style={[styles.titleText, {marginBottom: 20}]}>Ex. "I was walking alone in a forest until I saw a Monster"</Text>
                 <DashboardDivider />
-                <DreamFragmentInput 
-                    onAddFragmentPress={() => this._onAddFragment()} 
-                    onChangeText={(text) => this.setState({newFragment: text})}
-                />
+                <DreamFragmentInput onAddFragmentPress={(fragment) => this._onAddFragment(fragment)}/>
                 <DashboardDivider />
                 <FlatList 
                     data={this.state.completedFragmentsArr}

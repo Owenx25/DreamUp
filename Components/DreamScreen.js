@@ -6,6 +6,7 @@ import DashboardDivider from './DashboardDivider'
 import DreamFragment from './DreamFragment';
 import DreamTag from './DreamTag';
 import HeaderCheckIcon from './HeaderCheckIcon';
+import DreamFragmentInput from './DreamFragmentInput';
 
 export default class DreamScreen extends Component {
     static formatDate(date) {
@@ -31,7 +32,8 @@ export default class DreamScreen extends Component {
         this.state = {
             isReadOnly: true,
             descriptionText: '',
-            reaction: 'confused'
+            reaction: 'confused',
+            fragments: testFragments,
         }
     }
 
@@ -60,6 +62,13 @@ export default class DreamScreen extends Component {
 
     _renderFragmentItem = ({item}) => (<DreamFragment onPress={() => {}} text={item} />);
     _renderTagItem = ({item}) => (<DreamTag onPress={() => {}} text={item}/>);
+
+    _onAddFragmentPress(fragment) {
+        let fragments = [...this.state.fragments]
+        fragments.push(fragment)
+        this.setState({fragments})
+    }
+
     getReaction(reaction) {
         switch(reaction) {
             case 'happy':       return '😃';
@@ -102,8 +111,11 @@ export default class DreamScreen extends Component {
                     <View style={{margin: 20}}>
                         <Text style={{color: '#c4941d', fontSize: 24}}>Fragments</Text>
                         <View style={{alignItems: 'center'}}>
+                            {!this.state.isReadOnly &&
+                                <DreamFragmentInput onAddFragmentPress={(fragment) => this._onAddFragmentPress(fragment)}/>
+                            }
                             <FlatList
-                                data={testFragments}
+                                data={this.state.fragments}
                                 renderItem={this._renderFragmentItem}
                                 keyExtractor={(item, index) => index.toString()}
                             />

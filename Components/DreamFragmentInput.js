@@ -2,25 +2,63 @@ import React, { Component } from 'react';
 import {View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import ErrorDialog from './ErrorDialog'
+
 export default class DreamFragmentInput extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            fragment: '',
+            errorEmptyModalVisible: false,
+            errorLongModalVisible: false,
+        }
+    }
+
+    setErrorEmptyModalVisible(visible) {
+        this.setState({errorEmptyModalVisible: visible});
+    }
+
+    setErrorLongModalVisible(visible) {
+        this.setState({errorLongModalVisible: visible});
+    }
+
+    _onAddFragment() {
+        if (this.state.fragment.length == 0) {
+            this.setErrorEmptyModalVisible(!this.state.errorEmptyModalVisible);
+            return;
+        }
+        if (this.state.fragment.length > 140) {
+            this.setErrorLongModalVisible(!this.state.errorEmptyModalVisible);
+            return;
+        }
+        this.props.onAddFragmentPress(this.state.fragment);
+        this.TextInput.clear();
+    }
+
     render() {
-        return (
+        return (   
             <View style={styles.addFragmentBox}>
-                <TouchableOpacity onPress={() => {
-                    this.props.onAddFragmentPress();
-                    this.TextInput.clear();
-                }}>
+                <ErrorDialog
+                    isModalVisible={this.state.errorEmptyModalVisible}
+                    message='Fragment needs text!'
+                    onPress={() => {this.setErrorEmptyModalVisible(!this.state.errorEmptyModalVisible)}}
+                />
+                <ErrorDialog
+                    isModalVisible={this.state.errorLongModalVisible}
+                    message='Fragment is too long, you can add a more detailed summary later'
+                    onPress={() => {this.setErrorLongModalVisible(!this.state.errorLongModalVisible)}}
+                />
+                <TouchableOpacity onPress={() => this._onAddFragment()}>
                     <Icon style={{}} name='add-circle' size={40} color='#b300b3'/>
                 </TouchableOpacity>
                 <TextInput
-                    onChangeText={this.props.onChangeText}
+                    onChangeText={ (fragment) => this.setState({fragment})}
                     style={styles.fragmentTextBox}
                     placeholderTextColor='#5A5A5A' 
                     placeholder="what happened..."
                     multiline={true} 
                     ref={input => {this.TextInput = input}}
-                >
-                </TextInput>
+                />
             </View>
         )
     }
