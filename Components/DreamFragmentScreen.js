@@ -65,6 +65,7 @@ class DreamFragmentScreen extends Component {
         headerRight: <HeaderCheckIcon onDone={() => {
             if (params.getFragmentCount() > 0)
                 navigation.navigate('DreamScreen', {
+                    visionPath: navigation.getParam('visionPath', ''),
                     createDate: new Date(),
                 })}
         } />

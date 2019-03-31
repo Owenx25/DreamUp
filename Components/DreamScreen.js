@@ -76,6 +76,15 @@ export default class DreamScreen extends Component {
         this.setState({tags})
     }
 
+    getVisionPath() {
+        let path = this.props.navigation.getParam('visionPath');
+        if (path) {
+            return 'file:///' + path;
+        } else {
+            return 'file:///storage/emulated/0/Pictures/Dreams/80579150.jpg';
+        }
+    }
+
     getReaction(reaction) {
         switch(reaction) {
             case 'happy':       return '😃';
@@ -111,7 +120,7 @@ export default class DreamScreen extends Component {
                     <View style={{margin: 20}}>
                         <Text style={{color: '#c4941d', fontSize: 24, marginBottom: 10}}>Vision</Text>
                         <View style={{alignItems: 'center'}}>
-                            <Image resizeMode='contain' style={{height: 300, width: 300}} source={/*path from navigation params*/{uri:'file:///storage/emulated/0/Pictures/Dreams/80579150.jpg'}}/>
+                            <Image resizeMode='contain' style={{height: 300, width: 300}} source={{uri: this.getVisionPath()}}/>
                         </View>
                     </View>
                     <DashboardDivider/>
