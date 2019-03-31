@@ -7,6 +7,7 @@ import DreamFragment from './DreamFragment';
 import DreamTag from './DreamTag';
 import HeaderCheckIcon from './HeaderCheckIcon';
 import DreamFragmentInput from './DreamFragmentInput';
+import DreamTagInput from './DreamTagInput'
 
 export default class DreamScreen extends Component {
     static formatDate(date) {
@@ -34,6 +35,7 @@ export default class DreamScreen extends Component {
             descriptionText: '',
             reaction: 'confused',
             fragments: testFragments,
+            tags: testTags,
         }
     }
 
@@ -67,6 +69,11 @@ export default class DreamScreen extends Component {
         let fragments = [...this.state.fragments]
         fragments.push(fragment)
         this.setState({fragments})
+    }
+    _onAddTagPress(tag) {
+        let tags = [...this.state.tags]
+        tags.push(tag)
+        this.setState({tags})
     }
 
     getReaction(reaction) {
@@ -125,10 +132,13 @@ export default class DreamScreen extends Component {
                     <View style={{margin: 20}}>
                         <Text style={{color: '#c4941d', fontSize: 24}}>Tags</Text>
                         <View style={{alignItems: 'flex-start'}}>
+                            {!this.state.isReadOnly &&
+                                <DreamTagInput onAddTagPress={(fragment) => this._onAddTagPress(fragment)}/>
+                            }
                             <FlatList
                                 numColumns={1}
                                 horizontal={true}
-                                data={testTags}
+                                data={this.state.tags}
                                 renderItem={this._renderTagItem}
                                 keyExtractor={(item, index) => index.toString()}
                             />
