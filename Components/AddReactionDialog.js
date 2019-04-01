@@ -37,25 +37,25 @@ export default class AddReactionDialog extends Component {
                                     onPress={() => this.setState({currentSelected: 'happy'})}
                                     style={this.state.currentSelected == 'happy' ? styles.selectedCard : styles.reactionCard} 
                                 >
-                                    <Text style={{fontSize: 50}}>😃</Text>
+                                    <Text style={styles.emoji}>😃</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity 
                                     onPress={() => this.setState({currentSelected: 'sad'})}
                                     style={this.state.currentSelected == 'sad' ? styles.selectedCard : styles.reactionCard}     
                                 >
-                                    <Text style={{fontSize: 50}}>😥</Text>
+                                    <Text style={styles.emoji}>😥</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity 
                                     onPress={() => this.setState({currentSelected: 'angry'})}
                                     style={this.state.currentSelected == 'angry' ? styles.selectedCard : styles.reactionCard} 
                                 >
-                                    <Text style={{fontSize: 50}}>😡</Text>
+                                    <Text style={styles.emoji}>😡</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity 
                                     onPress={() => this.setState({currentSelected: 'afraid'})}
                                     style={this.state.currentSelected == 'afraid' ? styles.selectedCard : styles.reactionCard}     
                                 >
-                                    <Text style={{fontSize: 50}}>😱</Text>
+                                    <Text style={styles.emoji}>😱</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.buttonRow2}>
@@ -63,19 +63,19 @@ export default class AddReactionDialog extends Component {
                                     onPress={() => this.setState({currentSelected: 'confused'})}
                                     style={this.state.currentSelected == 'confused' ? styles.selectedCard : styles.reactionCard}     
                                 >
-                                    <Text style={{fontSize: 50}}>🤔</Text>
+                                    <Text style={styles.emoji}>🤔</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity 
                                     onPress={() => this.setState({currentSelected: 'suprised'})}
                                     style={this.state.currentSelected == 'suprised' ? styles.selectedCard : styles.reactionCard}     
                                 >
-                                    <Text style={{fontSize: 50}}>🤯</Text>
+                                    <Text style={styles.emoji}>🤯</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity 
                                     onPress={() => this.setState({currentSelected: 'indifferent'})}
                                     style={this.state.currentSelected == 'indifferent' ? styles.selectedCard : styles.reactionCard}     
                                 >
-                                    <Text style={{fontSize: 50}}>😐</Text>
+                                    <Text style={styles.emoji}>😐</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity 
                                     onPress={() => this.state.currentSelected != '' ? 
@@ -124,6 +124,10 @@ const styles = StyleSheet.create({
     buttonRow2: {
         justifyContent: 'space-between',
         flexDirection: 'row',
+    },
+    emoji: {
+        fontSize: 50,
+        color: 'rgba(0,0,0,1)',
     },
     reactionCard: {
         fontSize: 50,

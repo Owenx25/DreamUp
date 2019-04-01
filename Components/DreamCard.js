@@ -11,7 +11,7 @@ export default class DreamCard extends Component {
           style={{backgroundColor: '#c4941d', width: 120, margin: 10, justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'column'}}
           onPress={() => this.props.navigation.push('DreamScreen', {dreamId: this.props.dreamId})}
         >
-          <Text style={{fontSize: 40}}>{this.props.reaction}</Text>
+          <Text style={{fontSize: 40, color: '#rgba(0,0,0,1.0)'}}>{this.props.reaction}</Text>
           <Text style={{fontSize:30}}>{this.props.date.getMonth() + 1}/{this.props.date.getDate()}</Text>
         </TouchableOpacity>
       )

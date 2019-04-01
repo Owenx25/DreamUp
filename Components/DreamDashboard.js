@@ -23,7 +23,7 @@ export default class DreamDashboard extends Component {
       <View style={{flex:10}}>
         <AddReactionDialog 
           isModalVisible={this.state.reactionModalVisible} 
-          onBackPressed={() => this._setReactionModalVisible(false)}
+          //onBackPressed={() => this._setReactionModalVisible(false)}
           onDone={(reaction) => {
             this._setReactionModalVisible(!this.state.reactionModalVisible);
             this.props.navigation.navigate('VisionCanvas', {reaction: reaction});
