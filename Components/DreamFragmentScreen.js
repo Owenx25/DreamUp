@@ -78,7 +78,9 @@ class DreamFragmentScreen extends Component {
             if (params.getFragmentCount() > 0) {
                 navigation.navigate('DreamScreen', {
                     visionPath: navigation.getParam('visionPath', ''),
+                    existing: navigation.getParam('existing', false),
                     createDate: new Date(),
+                    reaction: navigation.getParam('reaction', 'indifferent'),
                 })
             } else {
                 params.setErrorEmptySubmitModalVisible(true)

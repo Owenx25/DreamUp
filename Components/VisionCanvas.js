@@ -53,7 +53,10 @@ export default class VisionCanvas extends Component {
                       // on Success, send path with nav to a new DreamScreen
                       // on Fail, provide message and don't do anything
                       if (success) {
-                          this.props.navigation.navigate("DreamFragmentScreen", {visionPath: path, existing: false});
+                          this.props.navigation.navigate("DreamFragmentScreen", {
+                            reaction: this.props.navigation.getParam('reaction', 'indifferent'),
+                            visionPath: path,
+                            existing: false});
                       } else {
                         Alert.alert('ERROR','Failed to save image!');
                       }

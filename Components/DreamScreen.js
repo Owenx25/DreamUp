@@ -33,7 +33,7 @@ export default class DreamScreen extends Component {
         this.state = {
             isReadOnly: true,
             descriptionText: '',
-            reaction: 'confused',
+            reaction: this.props.navigation.getParam('reaction', 'indifferent'),
             fragments: testFragments,
             tags: testTags,
         }
