@@ -6,7 +6,7 @@ import DreamCard from './DreamCard';
   // Holds Cards relating to specific day
   export default class CardContainer extends Component {
     _renderItem = ({item}) => (
-      <DreamCard date={item.date} dreamId={item.dreamId} navigation={this.props.navigation}/>
+      <DreamCard date={item.date} reaction={item.reaction} dreamId={item.dreamId} navigation={this.props.navigation}/>
     );
     render() {
       return (
@@ -26,7 +26,8 @@ import DreamCard from './DreamCard';
 const data = [
     {
       dreamId: 1,
-      date: new Date(),
+      date: new Date(2019, 3, 0),
+      reaction: '😃',
       fragments: [
         'My family was celebrating my birthday',
         'Then I was driving a car away from our home and suddenly into Boston',
@@ -37,7 +38,8 @@ const data = [
     },
     {
       dreamId: 2,
-      date: new Date(),
+      date: new Date(2019, 2, 30),
+      reaction: '😥',
       fragments: [
         'My family was celebrating my birthday',
         'Then I was driving a car away from our home and suddenly into Boston',
@@ -48,7 +50,8 @@ const data = [
     },
     {
       dreamId: 3,
-      date: new Date(),
+      date: new Date(2019, 2, 29),
+      reaction: '😡',
       fragments: [
         'My family was celebrating my birthday',
         'Then I was driving a car away from our home and suddenly into Boston',
@@ -59,7 +62,8 @@ const data = [
     },
     {
       dreamId: 4,
-      date: new Date(),
+      date: new Date(2019, 2, 28),
+      reaction: '😱',
       fragments: [
         'My family was celebrating my birthday',
         'Then I was driving a car away from our home and suddenly into Boston',

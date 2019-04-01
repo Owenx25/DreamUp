@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Modal, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Modal, TouchableOpacity, StyleSheet, BackHandler } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class AddReactionDialog extends Component {
@@ -9,12 +9,24 @@ export default class AddReactionDialog extends Component {
             currentSelected: '',
         }
     }
+
+    // componentDidMount() {
+    //     this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+    //         this.props.onBackPressed();
+    //         return true;
+    //     });
+    // }
+    // componentWillUnmount() {
+    //     this.backHandler.remove();
+    // }
+
     render() {
         return (
             <Modal
                 animationType='fade'
                 transparent={true}
                 visible={this.props.isModalVisible}
+                on
             >
                 <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <View style={styles.dialogBox}>
