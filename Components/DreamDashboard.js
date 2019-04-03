@@ -31,13 +31,6 @@ export default class DreamDashboard extends Component {
     db.find({}, (err, docs) => {
       this.setNightmares(docs);
     });
-    // db.find({ $where: function() { 
-    //   (this.createDate.getDay() == today.getDay()) &&
-    //   (this.createDate.getMonth() == today.getMonth()) &&
-    //   (this.createDate.getFullYear() == today.getFullYear())
-    // }}, (err, docs) {
-    //   this.addNightmare(docs[0]);
-    // });
   }
   setNightmares(nightmares) {
     console.log(nightmares);
@@ -87,7 +80,8 @@ export default class DreamDashboard extends Component {
       'The car broke down and I opened the trunk to find a small creature inside'
     ],
     tags: ['happy','city','car','monster'],
-    visionPath: ''
+    visionPath: '',
+    description: 'test description'
   },
   {
     createDate: new Date(2019, 2, 30),
@@ -98,7 +92,8 @@ export default class DreamDashboard extends Component {
       'The car broke down and I opened the trunk to find a small creature inside'
     ],
     tags: ['happy','city','car','monster'],
-    visionPath: ''
+    visionPath: '',
+    description: 'test description'
   },
   {
     createDate: new Date(2019, 2, 29),
@@ -109,7 +104,8 @@ export default class DreamDashboard extends Component {
       'The car broke down and I opened the trunk to find a small creature inside'
     ],
     tags: ['happy','city','car','monster'],
-    visionPath: ''
+    visionPath: '',
+    description: 'test description'
   },
   {
     createDate: new Date(2019, 2, 28),
@@ -120,6 +116,7 @@ export default class DreamDashboard extends Component {
       'The car broke down and I opened the trunk to find a small creature inside'
     ],
     tags: ['happy','city','car','monster'],
-    visionPath: ''
+    visionPath: '',
+    description: 'test description'
   },
 ]
