@@ -3,11 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Platform } from "react-native";
-
 import DreamDashboard from './DreamDashboard';
 import DreamScreen from './DreamScreen';
 import VisionCanvas from './VisionCanvas';
 import DreamFragmentScreen from './DreamFragmentScreen';
+import SettingsScreen from './SettingsScreen';
 
 class HomeScreen extends React.Component {
 
@@ -20,7 +20,7 @@ class HomeScreen extends React.Component {
     headerLeft: (
                        <Icon
                          //onPress={() => this.  alert('This is a button!')}
-                         onPress={() => navigation.navigate('VisionCanvas')}
+                         onPress={() => navigation.navigate('SettingsScreen')}
                          name='bars'
                          size={26}
                          style = {{paddingLeft: 15}}
@@ -52,7 +52,8 @@ const RootStack = createStackNavigator({
   Home: HomeScreen,
   DreamScreen: DreamScreen,
   VisionCanvas: VisionCanvas,
-  DreamFragmentScreen: DreamFragmentScreen
+  DreamFragmentScreen: DreamFragmentScreen,
+  SettingsScreen: SettingsScreen
 },
 {
   defaultRoot: 'Home',
