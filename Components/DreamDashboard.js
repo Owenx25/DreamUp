@@ -28,21 +28,19 @@ export default class DreamDashboard extends Component {
   lookupRecentDreams() {
     var today = new Date();
     let db = DBManager.getInstance()
-    db.findOne({}, (err, docs) => {
-      this.addNightmare(docs);
+    db.find({}, (err, docs) => {
+      this.setNightmares(docs);
     });
     // db.find({ $where: function() { 
     //   (this.createDate.getDay() == today.getDay()) &&
     //   (this.createDate.getMonth() == today.getMonth()) &&
     //   (this.createDate.getFullYear() == today.getFullYear())
-    // }}, function (err, docs) {
+    // }}, (err, docs) {
     //   this.addNightmare(docs[0]);
     // });
   }
-  addNightmare(nightmare) {
-    console.log(nightmare);
-    let nightmares = [...this.state.nightmares];
-    nightmares.push(nightmare);
+  setNightmares(nightmares) {
+    console.log(nightmares);
     this.setState({ nightmares });
   }
 
@@ -89,7 +87,7 @@ export default class DreamDashboard extends Component {
       'The car broke down and I opened the trunk to find a small creature inside'
     ],
     tags: ['happy','city','car','monster'],
-    vision: 'path to image'
+    visionPath: ''
   },
   {
     createDate: new Date(2019, 2, 30),
@@ -100,7 +98,7 @@ export default class DreamDashboard extends Component {
       'The car broke down and I opened the trunk to find a small creature inside'
     ],
     tags: ['happy','city','car','monster'],
-    vision: 'path to image'
+    visionPath: ''
   },
   {
     createDate: new Date(2019, 2, 29),
@@ -111,7 +109,7 @@ export default class DreamDashboard extends Component {
       'The car broke down and I opened the trunk to find a small creature inside'
     ],
     tags: ['happy','city','car','monster'],
-    vision: 'path to image'
+    visionPath: ''
   },
   {
     createDate: new Date(2019, 2, 28),
@@ -122,55 +120,6 @@ export default class DreamDashboard extends Component {
       'The car broke down and I opened the trunk to find a small creature inside'
     ],
     tags: ['happy','city','car','monster'],
-    vision: 'path to image'
+    visionPath: ''
   },
 ]
-
-// Sample data for flat list
-const nightmares = [
-  {
-    createDate: new Date(2019, 3, 28),
-    reaction: 'afraid',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    vision: 'path to image'
-  },
-  {
-    createDate: new Date(2019, 2, 10),
-    reaction: '😱',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    vision: 'path to image'
-  },
-  {
-    createDate: new Date(2019, 1, 20),
-    reaction: '😱',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    vision: 'path to image'
-  },
-  {
-    createDate: new Date(2019, 1, 14),
-    reaction: '😱',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    vision: 'path to image'
-  },
-]
-

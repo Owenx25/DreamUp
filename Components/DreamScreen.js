@@ -32,10 +32,9 @@ export default class DreamScreen extends Component {
         super(props)
         this.state = {
             isReadOnly: true,
-            descriptionText: '',
-            reaction: this.props.navigation.getParam('reaction', 'indifferent'),
-            fragments: testFragments,
-            tags: testTags,
+            descriptionText: testDreamObj.description,
+            fragments: [...this.props.navigation.getParam('dreamObject').fragments],
+            tags: [...this.props.navigation.getParam('dreamObject').tags],
         }
     }
 
@@ -67,9 +66,9 @@ export default class DreamScreen extends Component {
     _renderTagItem = ({item}) => (<DreamTag onPress={() => {}} text={item}/>);
 
     _onAddFragmentPress(fragment) {
-        let fragments = [...this.state.fragments]
+        let fragments = [...this.state.dreamObject.fragments]
         fragments.push(fragment)
-        this.setState({fragments})
+        this.setState({ dreamObject: fragments})
     }
     _onAddTagPress(tag) {
         let tags = [...this.state.tags]
@@ -78,7 +77,7 @@ export default class DreamScreen extends Component {
     }
 
     getVisionPath() {
-        let path = this.props.navigation.getParam('visionPath');
+        let path = this.props.navigation.getParam('dreamObject').visionPath;
         if (path) {
             return 'file:///' + path;
         } else {
@@ -148,7 +147,9 @@ export default class DreamScreen extends Component {
                     <View style={{margin: 20}}>
                         <Text style={{color: '#c4941d', fontSize: 24}}>Reaction</Text>
                         <View style={{alignItems: 'center'}}>
-                            <Text style={{fontSize: 70}}>{DreamScreen.getReaction(this.state.reaction)}</Text>
+                            <Text style={{fontSize: 70}}>
+                                {DreamScreen.getReaction(this.props.navigation.getParam('dreamObject').reaction)}
+                            </Text>
                         </View>
                     </View>
                     <DashboardDivider/>
@@ -171,18 +172,18 @@ export default class DreamScreen extends Component {
     }
 }
 
-const testFragments = [
-    'I was walking alone in a forest during the day',
-    'Suddenly there was a giant boom and it switched to night',
-    'I saw light at the edge of the woods so I ran to reach it'
-]
-
-const testTags = [
-    'forest',
-    'night',
-    'spooky',
-    'weird'
-]
+const testDreamObj = {
+    createDate: new Date(),
+    visionPath: 'file:///storage/emulated/0/Pictures/Dreams/80579150.jpg',
+    fragments: [
+        'My family was celebrating my birthday',
+        'Then I was driving a car away from our home and suddenly into Boston',
+        'The car broke down and I opened the trunk to find a small creature inside'
+    ],
+    tags: ['birthday', 'driving', 'monster'],
+    reaction: 'indifferent',
+    description: 'This is a really long description that could go on for many different characters with multiple paragraphs, newlines, and spaces'
+}
 
 const styles = StyleSheet.create({
     descriptionBox: {

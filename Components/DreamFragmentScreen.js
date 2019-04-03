@@ -87,10 +87,8 @@ class DreamFragmentScreen extends Component {
                 }
                 DBManager.getInstance().insert(doc);
                 navigation.replace('DreamScreen', {
-                    visionPath: doc.visionPath,
                     existing: navigation.getParam('existing', false),
-                    createDate: doc.createDate,
-                    reaction: doc.reaction,
+                    dreamObject: doc,
                 })
             } else {
                 params.setErrorEmptySubmitModalVisible(true)

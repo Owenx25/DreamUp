@@ -6,7 +6,8 @@ import DreamCard from './DreamCard';
   // Holds Cards relating to specific day
   export default class CardContainer extends Component {
     _renderItem = ({item}) => (
-      <DreamCard createDate={item.createDate} reaction={item.reaction} navigation={this.props.navigation}/>
+      <DreamCard navigation={this.props.navigation} dreamObject={item}  
+      />
     );
     render() {
       return (
