@@ -86,7 +86,7 @@ export default class DreamScreen extends Component {
         }
     }
 
-    getReaction(reaction) {
+    static getReaction(reaction) {
         switch(reaction) {
             case 'happy':       return '😃';
             case 'sad':         return '😥';
@@ -99,10 +99,9 @@ export default class DreamScreen extends Component {
     }
     /*
         navigation params:
-        dreamId - int
-        ? createDate - Date obj
-        ? reaction - string
-        visionPath - string
+        createDate - Date obj
+        reaction - string => this should be looked up? (coming from Dashboard vs Fragments)
+        visionPath - string => this should be looked up? (coming from Dashboard vs Fragments)
         existing - bool
     */
     render() {
@@ -149,7 +148,7 @@ export default class DreamScreen extends Component {
                     <View style={{margin: 20}}>
                         <Text style={{color: '#c4941d', fontSize: 24}}>Reaction</Text>
                         <View style={{alignItems: 'center'}}>
-                            <Text style={{fontSize: 70}}>{this.getReaction(this.state.reaction)}</Text>
+                            <Text style={{fontSize: 70}}>{DreamScreen.getReaction(this.state.reaction)}</Text>
                         </View>
                     </View>
                     <DashboardDivider/>

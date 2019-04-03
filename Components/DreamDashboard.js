@@ -7,16 +7,44 @@ import DreamGraph from './DreamGraph';
 import DashboardDivider from './DashboardDivider';
 import AddReactionDialog from './AddReactionDialog';
 
+import DBManager from '../DBManager'
+
 // Holds all dashboard components
 export default class DreamDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       reactionModalVisible: false,
+      nightmares: [],
     }
   }
 
+  componentDidMount() {
+    this.lookupRecentDreams();
+  }
+
   _setReactionModalVisible = (visible) => {this.setState({reactionModalVisible: visible})}
+
+  lookupRecentDreams() {
+    var today = new Date();
+    let db = DBManager.getInstance()
+    db.findOne({}, (err, docs) => {
+      this.addNightmare(docs);
+    });
+    // db.find({ $where: function() { 
+    //   (this.createDate.getDay() == today.getDay()) &&
+    //   (this.createDate.getMonth() == today.getMonth()) &&
+    //   (this.createDate.getFullYear() == today.getFullYear())
+    // }}, function (err, docs) {
+    //   this.addNightmare(docs[0]);
+    // });
+  }
+  addNightmare(nightmare) {
+    console.log(nightmare);
+    let nightmares = [...this.state.nightmares];
+    nightmares.push(nightmare);
+    this.setState({ nightmares });
+  }
 
   render() {
     return (  
@@ -32,7 +60,7 @@ export default class DreamDashboard extends Component {
         <ScrollView>
           <CardContainer color='white' title='Recent Dreams' data={data} navigation={this.props.navigation}/>
           <DashboardDivider />
-          <CardContainer color='white' title='Nightmares' data={nightmares} navigation={this.props.navigation}/>
+          <CardContainer color='white' title='Nightmares' data={this.state.nightmares} navigation={this.props.navigation}/>
           <DashboardDivider />
           <DreamGraph name='Weekly Fragments'
           />
@@ -53,9 +81,8 @@ export default class DreamDashboard extends Component {
  // Sample data for flat list
  const data = [
   {
-    dreamId: 1,
-    date: new Date(2019, 3, 0),
-    reaction: '😃',
+    createDate: new Date(2019, 3, 0),
+    reaction: 'happy',
     fragments: [
       'My family was celebrating my birthday',
       'Then I was driving a car away from our home and suddenly into Boston',
@@ -65,9 +92,8 @@ export default class DreamDashboard extends Component {
     vision: 'path to image'
   },
   {
-    dreamId: 2,
-    date: new Date(2019, 2, 30),
-    reaction: '😥',
+    createDate: new Date(2019, 2, 30),
+    reaction: 'sad',
     fragments: [
       'My family was celebrating my birthday',
       'Then I was driving a car away from our home and suddenly into Boston',
@@ -77,9 +103,8 @@ export default class DreamDashboard extends Component {
     vision: 'path to image'
   },
   {
-    dreamId: 3,
-    date: new Date(2019, 2, 29),
-    reaction: '😡',
+    createDate: new Date(2019, 2, 29),
+    reaction: 'angry',
     fragments: [
       'My family was celebrating my birthday',
       'Then I was driving a car away from our home and suddenly into Boston',
@@ -89,9 +114,8 @@ export default class DreamDashboard extends Component {
     vision: 'path to image'
   },
   {
-    dreamId: 4,
-    date: new Date(2019, 2, 28),
-    reaction: '😱',
+    createDate: new Date(2019, 2, 28),
+    reaction: 'afraid',
     fragments: [
       'My family was celebrating my birthday',
       'Then I was driving a car away from our home and suddenly into Boston',
@@ -105,8 +129,18 @@ export default class DreamDashboard extends Component {
 // Sample data for flat list
 const nightmares = [
   {
-    dreamId: 1,
-    date: new Date(2019, 3, 28),
+    createDate: new Date(2019, 3, 28),
+    reaction: 'afraid',
+    fragments: [
+      'My family was celebrating my birthday',
+      'Then I was driving a car away from our home and suddenly into Boston',
+      'The car broke down and I opened the trunk to find a small creature inside'
+    ],
+    tags: ['happy','city','car','monster'],
+    vision: 'path to image'
+  },
+  {
+    createDate: new Date(2019, 2, 10),
     reaction: '😱',
     fragments: [
       'My family was celebrating my birthday',
@@ -117,8 +151,7 @@ const nightmares = [
     vision: 'path to image'
   },
   {
-    dreamId: 2,
-    date: new Date(2019, 2, 10),
+    createDate: new Date(2019, 1, 20),
     reaction: '😱',
     fragments: [
       'My family was celebrating my birthday',
@@ -129,20 +162,7 @@ const nightmares = [
     vision: 'path to image'
   },
   {
-    dreamId: 3,
-    date: new Date(2019, 1, 20),
-    reaction: '😱',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    vision: 'path to image'
-  },
-  {
-    dreamId: 4,
-    date: new Date(2019, 1, 14),
+    createDate: new Date(2019, 1, 14),
     reaction: '😱',
     fragments: [
       'My family was celebrating my birthday',

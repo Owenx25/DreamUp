@@ -2,42 +2,64 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Platform } from "react-native";
 
 import DreamDashboard from './DreamDashboard';
 import DreamScreen from './DreamScreen';
 import VisionCanvas from './VisionCanvas';
 import DreamFragmentScreen from './DreamFragmentScreen';
 
-class HomeScreen extends React.Component {
+/* Only objects like : 
+  {
+    createDate: dateobj,
+    visionPath: string,
+    fragments: [string]
+    tags: [string]
+    reaction: string,
+    description: string,
+  }
+  Should be inserted into the DB!
+  ex: {
+    createDate: new Date(),
+    visionPath: 'file:///storage/emulated/0/Pictures/Dreams/80579150.jpg',
+    fragments: [
+      'My family was celebrating my birthday',
+      'Then I was driving a car away from our home and suddenly into Boston',
+      'The car broke down and I opened the trunk to find a small creature inside'
+    ],
+    tags: ['birthday', 'driving', 'monster'],
+    reaction: 'indifferent',
+    description: 'This is a really long description that could go on for many different characters with multiple paragraphs, newlines, and spaces'
+  }
+*/
 
-    static navigationOptions = ({ navigation }) => ({
-    title: 'DreamUp',
-        headerTitleStyle: {
-            textAlign:"center",
-            flex:1
-        },
-    headerLeft: (
-                       <Icon
-                         //onPress={() => this.  alert('This is a button!')}
-                         onPress={() => navigation.navigate('VisionCanvas')}
-                         name='bars'
-                         size={26}
-                         style = {{paddingLeft: 15}}
-                       />
-                     ),
-     headerRight: (
-                        <Icon
-                          onPress={() => alert('DreamUp 2019')}
-                          name='info-circle'
-                          size={26}
-                          style = {{paddingRight: 15}}
-                        />
-                      ),
-    headerStyle: {
-      backgroundColor: '#c4941d',
-      }
-    });
+class HomeScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+  title: 'DreamUp',
+      headerTitleStyle: {
+          textAlign:"center",
+          flex:1
+      },
+  headerLeft: (
+                      <Icon
+                        //onPress={() => this.  alert('This is a button!')}
+                        onPress={() => navigation.navigate('VisionCanvas')}
+                        name='bars'
+                        size={26}
+                        style = {{paddingLeft: 15}}
+                      />
+                    ),
+    headerRight: (
+                      <Icon
+                        onPress={() => alert('DreamUp 2019')}
+                        name='info-circle'
+                        size={26}
+                        style = {{paddingRight: 15}}
+                      />
+                    ),
+  headerStyle: {
+    backgroundColor: '#c4941d',
+    }
+  });
 
   render() {
     return (
