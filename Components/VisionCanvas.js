@@ -53,7 +53,7 @@ export default class VisionCanvas extends Component {
                       // on Success, send path with nav to a new DreamScreen
                       // on Fail, provide message and don't do anything
                       if (success) {
-                          this.props.navigation.navigate("DreamFragmentScreen", {
+                          this.props.navigation.replace("DreamFragmentScreen", {
                             reaction: this.props.navigation.getParam('reaction', 'indifferent'),
                             visionPath: path,
                             existing: false});
