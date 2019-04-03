@@ -9,6 +9,8 @@ import ErrorDialog from './ErrorDialog';
 import HeaderCheckIcon from './HeaderCheckIcon';
 import DreamFragment from './DreamFragment';
 
+import DBManager from '../DBManager';
+
 class DreamFragmentScreen extends Component {
     constructor(props) {
         super(props);
@@ -55,14 +57,13 @@ class DreamFragmentScreen extends Component {
     componentDidMount() {
         this.props.navigation.setParams({
             getFragmentCount: () => this.getFragmentCount(),
+            getFragments: () => this.getFragments(),
             errorEmptySubmitModalVisible: false,
             setErrorEmptySubmitModalVisible: this._setErrorEmptySubmitModalVisible,
         })
     }
-
-    getFragmentCount() {
-        return this.state.completedFragmentsArr.length;
-    }
+    getFragmentCount = () => this.state.completedFragmentsArr.length;
+    getFragments = () => this.state.completedFragmentsArr;
 
     _renderFragmentItem(item, index) {
         return (
@@ -76,11 +77,20 @@ class DreamFragmentScreen extends Component {
         title: 'What happened?',
         headerRight: <HeaderCheckIcon onDone={() => {
             if (params.getFragmentCount() > 0) {
-                navigation.replace('DreamScreen', {
+                let today = new Date();
+                var doc = {
+                    createDate: today,
                     visionPath: navigation.getParam('visionPath', ''),
-                    existing: navigation.getParam('existing', false),
-                    createDate: new Date(),
+                    fragments: params.getFragments(),
+                    tags: [],
                     reaction: navigation.getParam('reaction', 'indifferent'),
+                    description: '',
+                   // id: today.ge
+                }
+                DBManager.getInstance().insert(doc);
+                navigation.replace('DreamScreen', {
+                    existing: navigation.getParam('existing', false),
+                    dreamObject: doc,
                 })
             } else {
                 params.setErrorEmptySubmitModalVisible(true)

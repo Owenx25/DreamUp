@@ -7,16 +7,35 @@ import DreamGraph from './DreamGraph';
 import DashboardDivider from './DashboardDivider';
 import AddReactionDialog from './AddReactionDialog';
 
+import DBManager from '../DBManager'
+
 // Holds all dashboard components
 export default class DreamDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       reactionModalVisible: false,
+      nightmares: [],
     }
   }
 
+  componentDidMount() {
+    this.lookupRecentDreams();
+  }
+
   _setReactionModalVisible = (visible) => {this.setState({reactionModalVisible: visible})}
+
+  lookupRecentDreams() {
+    var today = new Date();
+    let db = DBManager.getInstance()
+    db.find({}, (err, docs) => {
+      this.setNightmares(docs);
+    });
+  }
+  setNightmares(nightmares) {
+    console.log(nightmares);
+    this.setState({ nightmares });
+  }
 
   render() {
     return (  
@@ -32,7 +51,7 @@ export default class DreamDashboard extends Component {
         <ScrollView>
           <CardContainer color='white' title='Recent Dreams' data={data} navigation={this.props.navigation}/>
           <DashboardDivider />
-          <CardContainer color='white' title='Nightmares' data={nightmares} navigation={this.props.navigation}/>
+          <CardContainer color='white' title='Nightmares' data={this.state.nightmares} navigation={this.props.navigation}/>
           <DashboardDivider />
           <DreamGraph name='Weekly Fragments'
           />
@@ -53,104 +72,51 @@ export default class DreamDashboard extends Component {
  // Sample data for flat list
  const data = [
   {
-    dreamId: 1,
-    date: new Date(2019, 3, 0),
-    reaction: '😃',
+    createDate: new Date(2019, 3, 0),
+    reaction: 'happy',
     fragments: [
       'My family was celebrating my birthday',
       'Then I was driving a car away from our home and suddenly into Boston',
       'The car broke down and I opened the trunk to find a small creature inside'
     ],
     tags: ['happy','city','car','monster'],
-    vision: 'path to image'
+    visionPath: '',
+    description: 'test description'
   },
   {
-    dreamId: 2,
-    date: new Date(2019, 2, 30),
-    reaction: '😥',
+    createDate: new Date(2019, 2, 30),
+    reaction: 'sad',
     fragments: [
       'My family was celebrating my birthday',
       'Then I was driving a car away from our home and suddenly into Boston',
       'The car broke down and I opened the trunk to find a small creature inside'
     ],
     tags: ['happy','city','car','monster'],
-    vision: 'path to image'
+    visionPath: '',
+    description: 'test description'
   },
   {
-    dreamId: 3,
-    date: new Date(2019, 2, 29),
-    reaction: '😡',
+    createDate: new Date(2019, 2, 29),
+    reaction: 'angry',
     fragments: [
       'My family was celebrating my birthday',
       'Then I was driving a car away from our home and suddenly into Boston',
       'The car broke down and I opened the trunk to find a small creature inside'
     ],
     tags: ['happy','city','car','monster'],
-    vision: 'path to image'
+    visionPath: '',
+    description: 'test description'
   },
   {
-    dreamId: 4,
-    date: new Date(2019, 2, 28),
-    reaction: '😱',
+    createDate: new Date(2019, 2, 28),
+    reaction: 'afraid',
     fragments: [
       'My family was celebrating my birthday',
       'Then I was driving a car away from our home and suddenly into Boston',
       'The car broke down and I opened the trunk to find a small creature inside'
     ],
     tags: ['happy','city','car','monster'],
-    vision: 'path to image'
+    visionPath: '',
+    description: 'test description'
   },
 ]
-
-// Sample data for flat list
-const nightmares = [
-  {
-    dreamId: 1,
-    date: new Date(2019, 3, 28),
-    reaction: '😱',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    vision: 'path to image'
-  },
-  {
-    dreamId: 2,
-    date: new Date(2019, 2, 10),
-    reaction: '😱',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    vision: 'path to image'
-  },
-  {
-    dreamId: 3,
-    date: new Date(2019, 1, 20),
-    reaction: '😱',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    vision: 'path to image'
-  },
-  {
-    dreamId: 4,
-    date: new Date(2019, 1, 14),
-    reaction: '😱',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    vision: 'path to image'
-  },
-]
-

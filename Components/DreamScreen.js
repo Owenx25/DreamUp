@@ -9,6 +9,8 @@ import HeaderCheckIcon from './HeaderCheckIcon';
 import DreamFragmentInput from './DreamFragmentInput';
 import DreamTagInput from './DreamTagInput'
 
+import DBManager from '../DBManager';
+
 export default class DreamScreen extends Component {
     static formatDate(date) {
         if (typeof date == "string") {
@@ -32,10 +34,9 @@ export default class DreamScreen extends Component {
         super(props)
         this.state = {
             isReadOnly: true,
-            descriptionText: '',
-            reaction: this.props.navigation.getParam('reaction', 'indifferent'),
-            fragments: testFragments,
-            tags: testTags,
+            description: this.props.navigation.getParam('dreamObject').description,
+            fragments: [...this.props.navigation.getParam('dreamObject').fragments],
+            tags: [...this.props.navigation.getParam('dreamObject').tags],
         }
     }
 
@@ -44,8 +45,16 @@ export default class DreamScreen extends Component {
             // Need to set this when changing state
             isReadOnly: true,
             setReadOnly: this._setReadOnly,
+            getDescription: this.getDescription,
+            getFragments: this.getFragments,
+            getTags: this.getTags,
         })
     }
+
+    getDescription = () => this.state.description;
+    getFragments = () => this.state.fragments;
+    getTags = () => this.state.tags;
+
 
     _setReadOnly = (value) => {
         // Need logic for saving to DB here
@@ -56,10 +65,28 @@ export default class DreamScreen extends Component {
     static navigationOptions = ({ navigation }) => {
         const {params = {}} = navigation.state;
         return {
-        title: 'Dream from ' + DreamScreen.formatDate(navigation.getParam('createDate', 'Dream from ???')),
-        headerRight: params.isReadOnly ? 
+        title: 'Dream from ' + DreamScreen.formatDate(navigation.getParam('dreamObject').createDate),
+        headerRight: 
+            params.isReadOnly ? 
             <HeaderEditIcon onPress={() => params.setReadOnly(false)}/> :
-            <HeaderCheckIcon onDone={() => params.setReadOnly(true)}/>
+            <HeaderCheckIcon onDone={() => {
+                let db = DBManager.getInstance();
+                db.update({ $where: () => {
+                    (this.createDate.getDay() === today.getDay()) &&
+                    (this.createDate.getMonth() === today.getMonth()) &&
+                    (this.createDate.getFullYear() === today.getFullYear())
+                }}
+                , { 
+                    description: params.getDescription(),
+                    fragments: params.getFragments(),
+                    tags: params.getTags(),
+                },
+                 (err, doc) => {
+                  console.log('Updated doc:');
+                  console.log(doc);
+                });
+                params.setReadOnly(true);
+            }}/>
       };
     };
 
@@ -69,7 +96,7 @@ export default class DreamScreen extends Component {
     _onAddFragmentPress(fragment) {
         let fragments = [...this.state.fragments]
         fragments.push(fragment)
-        this.setState({fragments})
+        this.setState({ fragments })
     }
     _onAddTagPress(tag) {
         let tags = [...this.state.tags]
@@ -78,7 +105,7 @@ export default class DreamScreen extends Component {
     }
 
     getVisionPath() {
-        let path = this.props.navigation.getParam('visionPath');
+        let path = this.props.navigation.getParam('dreamObject').visionPath;
         if (path) {
             return 'file:///' + path;
         } else {
@@ -86,7 +113,7 @@ export default class DreamScreen extends Component {
         }
     }
 
-    getReaction(reaction) {
+    static getReaction(reaction) {
         switch(reaction) {
             case 'happy':       return '😃';
             case 'sad':         return '😥';
@@ -97,14 +124,7 @@ export default class DreamScreen extends Component {
             case 'afraid':      return '😱';
         }
     }
-    /*
-        navigation params:
-        dreamId - int
-        ? createDate - Date obj
-        ? reaction - string
-        visionPath - string
-        existing - bool
-    */
+
     render() {
         return (
             <View style={{backgroundColor: '#2b1381', flex: 1, flexDirection: 'column'}}>
@@ -118,7 +138,7 @@ export default class DreamScreen extends Component {
                     <DashboardDivider/>
                     <View style={{margin: 20}}>
                         <Text style={{color: '#c4941d', fontSize: 24}}>Fragments</Text>
-                        <View style={{alignItems: 'center'}}>
+                        <View style={{}}>
                             {!this.state.isReadOnly &&
                                 <DreamFragmentInput onAddFragmentPress={(fragment) => this._onAddFragmentPress(fragment)}/>
                             }
@@ -149,7 +169,9 @@ export default class DreamScreen extends Component {
                     <View style={{margin: 20}}>
                         <Text style={{color: '#c4941d', fontSize: 24}}>Reaction</Text>
                         <View style={{alignItems: 'center'}}>
-                            <Text style={{fontSize: 70}}>{this.getReaction(this.state.reaction)}</Text>
+                            <Text style={{fontSize: 70}}>
+                                {DreamScreen.getReaction(this.props.navigation.getParam('dreamObject').reaction)}
+                            </Text>
                         </View>
                     </View>
                     <DashboardDivider/>
@@ -159,9 +181,9 @@ export default class DreamScreen extends Component {
                             <TextInput
                                 editable={!this.state.isReadOnly}
                                 style={styles.descriptionBox} 
-                                onChangeText={(descriptionText) => this.setState({descriptionText})}
+                                onChangeText={(description) => this.setState({description})}
                                 placeholder={'Add more detail about your dream...'}
-                                value={this.state.descriptionText}
+                                value={this.state.description}
                                 multiline={true}
                             />
                         </View>
@@ -172,18 +194,18 @@ export default class DreamScreen extends Component {
     }
 }
 
-const testFragments = [
-    'I was walking alone in a forest during the day',
-    'Suddenly there was a giant boom and it switched to night',
-    'I saw light at the edge of the woods so I ran to reach it'
-]
-
-const testTags = [
-    'forest',
-    'night',
-    'spooky',
-    'weird'
-]
+const testDreamObj = {
+    createDate: new Date(),
+    visionPath: 'file:///storage/emulated/0/Pictures/Dreams/80579150.jpg',
+    fragments: [
+        'My family was celebrating my birthday',
+        'Then I was driving a car away from our home and suddenly into Boston',
+        'The car broke down and I opened the trunk to find a small creature inside'
+    ],
+    tags: ['birthday', 'driving', 'monster'],
+    reaction: 'indifferent',
+    description: 'This is a really long description that could go on for many different characters with multiple paragraphs, newlines, and spaces'
+}
 
 const styles = StyleSheet.create({
     descriptionBox: {

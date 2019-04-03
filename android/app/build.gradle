@@ -134,6 +134,7 @@ android {
 }
 
 dependencies {
+    implementation project(':@react-native-community_async-storage')
     implementation project(':@terrylinla_react-native-sketch-canvas')
     implementation project(':react-native-gesture-handler')
     implementation project(':react-native-vector-icons')
