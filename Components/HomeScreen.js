@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DreamDashboard from './DreamDashboard';
+import MenuButton from './MenuButton';
 
 export default class HomeScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -11,17 +12,11 @@ export default class HomeScreen extends Component {
             flex:1
         },
     headerLeft: (
-                        <Icon
-                          //onPress={() => this.  alert('This is a button!')}
-                          onPress={() => navigation.navigate('SettingsScreen')}
-                          name='bars'
-                          size={26}
-                          style = {{paddingLeft: 15}}
-                        />
+                        <MenuButton navigationProps={navigation}/>
                       ),
       headerRight: (
                         <Icon
-                          onPress={() => alert('DreamUp 2019')}
+                         onPress={() => alert('DreamUp 2019')}
                           name='info-circle'
                           size={26}
                           style = {{paddingRight: 15}}

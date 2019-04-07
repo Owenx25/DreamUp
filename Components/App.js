@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+//import { createStackNavigator, createAppContainer } from 'react-navigation';
 import DreamDashboard from './DreamDashboard';
 import DreamScreen from './DreamScreen';
 import VisionCanvas from './VisionCanvas';
 import DreamFragmentScreen from './DreamFragmentScreen';
 import SettingsScreen from './SettingsScreen';
-import HomeScreen from './HomeScreen';
+import DrawerNavigator from './DrawerNavigator';
 
 /* Only objects like : 
   {
@@ -33,28 +33,22 @@ import HomeScreen from './HomeScreen';
 */
 
 
-const RootStack = createStackNavigator({
-  Home: HomeScreen,
-  DreamScreen: DreamScreen,
-  VisionCanvas: VisionCanvas,
-  DreamFragmentScreen: DreamFragmentScreen,
-  SettingsScreen: SettingsScreen
-},
-{
-  defaultRoot: 'Home',
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: '#c4941d'
-    }
-  },
-  navigationOptions: {
-  }
-});
 
-const AppContainer = createAppContainer(RootStack);
+//const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
   render() {
-    return <AppContainer />;
+    return(
+    <View style={styles.container}>
+      <DrawerNavigator/>
+    </View>
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F5FCFF',
+  },
+});
