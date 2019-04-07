@@ -78,14 +78,16 @@ class DreamFragmentScreen extends Component {
         headerRight: <HeaderCheckIcon onDone={() => {
             if (params.getFragmentCount() > 0) {
                 let today = new Date();
+                let reaction = navigation.getParam('reaction', 'indifferent');
                 var doc = {
                     createDate: today,
                     visionPath: navigation.getParam('visionPath', ''),
                     fragments: params.getFragments(),
                     tags: [],
-                    reaction: navigation.getParam('reaction', 'indifferent'),
+                    reaction: reaction,
                     description: '',
                     id: today.getTime(),
+                    nightmare: reaction == 'afraid' ? true : false,
                 }
                 DBManager.getInstance().insert(doc);
                 navigation.replace('DreamScreen', {

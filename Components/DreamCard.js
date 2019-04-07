@@ -11,7 +11,14 @@ export default class DreamCard extends Component {
   render() {
     return (
       <TouchableOpacity 
-        style={{backgroundColor: '#c4941d', width: 120, margin: 10, justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'column'}}
+        style={{
+          backgroundColor: this.props.cardColor, 
+          width: 120, 
+          margin: 10, 
+          borderRadius: 20,
+          justifyContent: 'flex-end', 
+          alignItems: 'center', 
+          flexDirection: 'column'}}
         onPress={() => {
           this.props.navigation.navigate('DreamScreen', {
             existing: true,

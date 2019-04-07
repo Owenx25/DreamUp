@@ -10,6 +10,7 @@ import DreamCard from './DreamCard';
         navigation={this.props.navigation} 
         dreamObject={item}  
         onLongPress={() => this.props.onCardLongPress(item)}
+        cardColor={this.props.cardColor}
       />
     );
     render() {

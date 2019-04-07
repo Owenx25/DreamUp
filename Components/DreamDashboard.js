@@ -19,12 +19,13 @@ export default class DreamDashboard extends Component {
       reactionModalVisible: false,
       deleteCardModalVisible: false,
       nightmares: [],
+      dreams: [],
       selectedDream: null,
     }
   }
 
   componentDidMount() {
-    this.lookupRecentDreams();
+    this.lookupDreams();
   }
 
   _setReactionModalVisible = (visible) => {this.setState({reactionModalVisible: visible})}
@@ -34,30 +35,33 @@ export default class DreamDashboard extends Component {
     let db = DBManager.getInstance();
     let date = this.state.selectedDream.createDate;
     db.remove({id: date.getTime()}, {}, (err, numRemoved) => {});
-    this.lookupRecentDreams();
+    this.lookupDreams();
     this._setDeleteCardModalVisible(!this.state.deleteCardModalVisible);
   }
 
-  // This updates the nightmares section right now
-  lookupRecentDreams() {
-    var today = new Date();
-    let db = DBManager.getInstance()
-    db.find({}, (err, docs) => {
-      this.setNightmares(docs);
-    });
-  }
-  setNightmares(nightmares) {
-    console.log(nightmares);
-    this.setState({ nightmares });
-  }
 
   // Throw any list refresh stuff in here
   willFocus = this.props.navigation.addListener(
     'willFocus',
     () => {
-      this.lookupRecentDreams();
+      this.lookupDreams();
     }
   )
+  lookupDreams() {
+    let db = DBManager.getInstance()
+    db.find({}, (err, docs) => this.setDreams(docs));
+    db.find({ nightmare: true }, (err, docs) => this.setNightmares(docs));
+  }
+  setNightmares(nightmares) {
+    console.log('Nightmares:');
+    console.log(nightmares);
+    this.setState({ nightmares });
+  }
+  setDreams(dreams) {
+    console.log('Dreams:');
+    console.log(dreams);
+    this.setState({ dreams });
+  }
 
   render() {
     return (
@@ -79,11 +83,20 @@ export default class DreamDashboard extends Component {
           }}
         />
         <ScrollView>
-          <CardContainer color='white' title='Recent Dreams' data={data} navigation={this.props.navigation}/>
+          <CardContainer color='white' title='Recent Dreams'
+            data={this.state.dreams}
+            navigation={this.props.navigation}
+            cardColor='#c4941d'
+            onCardLongPress={(dream) => {
+              this.setState({ selectedDream: dream });
+              this._setDeleteCardModalVisible(!this.state.deleteCardModalVisible);
+            }}
+          />
           <DashboardDivider />
           <CardContainer color='white' title='Nightmares' 
             data={this.state.nightmares} 
             navigation={this.props.navigation}
+            cardColor='#b30000'
             onCardLongPress={(dream) => {
               this.setState({ selectedDream: dream });
               this._setDeleteCardModalVisible(!this.state.deleteCardModalVisible);
@@ -106,7 +119,7 @@ export default class DreamDashboard extends Component {
   }
 }
 
- // Sample data for flat list
+ // Mock data for flat list
  const data = [
   {
     createDate: new Date(2019, 3, 0),
