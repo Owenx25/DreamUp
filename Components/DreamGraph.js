@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { LineChart, AreaChart, YAxis, XAxis, Grid } from 'react-native-svg-charts';
+import { BarChart, AreaChart, YAxis, XAxis, Grid } from 'react-native-svg-charts';
+import * as scale from 'd3-scale';
+
+import DBManager from '../DBManager';
 
 // Graph of some data related to dreams
 // const Gradient = () => (
@@ -12,36 +15,44 @@ import { LineChart, AreaChart, YAxis, XAxis, Grid } from 'react-native-svg-chart
 //     </Defs>
 //   )
   export default class DreamGraph extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        dreams: [],
+      }
+    }
+
     render() {
       return (   
         <View style={{margin: 20, flexDirection: 'column', flex: 1, alignItems: 'center'}}>
             <Text style={{color: '#c4941d', fontSize: 24}}>{this.props.name} Graph</Text>
             <View style={styles.graphcontainer}>
                 <YAxis
-                    data={graph_data}
-                    numberOfTicks={5}
-                    yAccessor= {({ item }) => item.fragments}
+                    data={this.props.data}
+                    numberOfTicks={3}
+                    yAccessor= {({ item }) => item.fragments.length}
                     style={{marginBottom: 10}}
                     contentInset={{top: 10, bottom: 10}}
                     svg={{fontSize: 16, fill: 'black'}}
                 />
                 <View style={{ flex: 1, marginLeft: 10 }}>
-                    <AreaChart
-                    numberOfTicks={5}
+                    <BarChart
+                    numberOfTicks={3}
                     style={{ flex: 1 }}
-                    yAccessor= {({ item }) => item.fragments}
-                    data={graph_data}
+                    yAccessor= {({ item }) => item.fragments.length}
+                    data={this.props.data}
                     contentInset={{top: 10, bottom: 10}}
                     svg={{ fill: '#b300b3' }}
                     >
                     <Grid />
-                    </AreaChart>
+                    </BarChart>
                     <XAxis
-                    style={{ marginHorizontal: -10, height: 5, marginTop: 5}}
-                    data={graph_data}
-                    numberOfTicks={7}
-                    xAccessor={({ item }) => item.day.getDay() }
-                    formatLabel={(day) => {
+                    style={{ marginHorizontal: 10, height: 5, marginTop: 5}}
+                    data={this.props.data}
+                    numberOfTicks={this.props.data.length}  
+                    xAccessor={({ item }) => item.createDate.getDay()}
+                    formatLabel={( day ) => { 
+                        //return `${date.getDate()}/${date.getMonth()}`
                         switch(day) {
                         case 0: return 'SUN'
                         case 1: return'MON'
@@ -72,41 +83,93 @@ import { LineChart, AreaChart, YAxis, XAxis, Grid } from 'react-native-svg-chart
       borderWidth: 0.5,
       borderColor: 'white'
     }});
+    
 
-const graph_data = [ 
-    {
-      fragments: 3,
-      day: new Date(2019, 3, 3),
-      name: 'MON'
-    },
-    {
-      fragments: 1,
-      day: new Date(2019, 3, 4),
-      name: 'MON'
-    },
-    {
-      fragments: 3,
-      day: new Date(2019, 3, 5),
-      name: 'MON'
-    },
-    {
-      fragments: 2,
-      day: new Date(2019, 3, 6),
-      name: 'MON'
-    },
-    {
-      fragments: 2,
-      day: new Date(2019, 3, 7),
-      name: 'MON'
-    },
-    {
-      fragments: 5,
-      day: new Date(2019, 3, 8),
-      name: 'MON'
-    },
-    {
-      fragments: 1,
-      day: new Date(2019, 3, 9),
-      name: 'MON'
-    },
-  ]
+const data = [ 
+  {
+    createDate: new Date(2019, 3, 0),
+    reaction: 'happy',
+    fragments: [
+      
+      'Then I was driving a car away from our home and suddenly into Boston',
+      'The car broke down and I opened the trunk to find a small creature inside'
+    ],
+    tags: ['happy','city','car','monster'],
+    visionPath: '',
+    description: 'test description'
+  },
+  {
+    createDate: new Date(2019, 2, 30),
+    reaction: 'sad',
+    fragments: [
+      'My family was celebrating my birthday',
+      'My family was celebrating my birthday',
+      'My family was celebrating my birthday',
+      'Then I was driving a car away from our home and suddenly into Boston',
+      'The car broke down and I opened the trunk to find a small creature inside'
+    ],
+    tags: ['happy','city','car','monster'],
+    visionPath: '',
+    description: 'test description'
+  },
+  {
+    createDate: new Date(2019, 2, 29),
+    reaction: 'angry',
+    fragments: [
+      'The car broke down and I opened the trunk to find a small creature inside'
+    ],
+    tags: ['happy','city','car','monster'],
+    visionPath: '',
+    description: 'test description'
+  },
+  {
+    createDate: new Date(2019, 2, 28),
+    reaction: 'afraid',
+    fragments: [
+      'My family was celebrating my birthday',
+      'Then I was driving a car away from our home and suddenly into Boston',
+      'The car broke down and I opened the trunk to find a small creature inside',
+      'My family was celebrating my birthday',
+    ],
+    tags: ['happy','city','car','monster'],
+    visionPath: '',
+    description: 'test description'
+  },
+  {
+    createDate: new Date(2019, 3, 0),
+    reaction: 'happy',
+    fragments: [
+      
+      'Then I was driving a car away from our home and suddenly into Boston',
+      'The car broke down and I opened the trunk to find a small creature inside'
+    ],
+    tags: ['happy','city','car','monster'],
+    visionPath: '',
+    description: 'test description'
+  },
+  {
+    createDate: new Date(2019, 3, 0),
+    reaction: 'happy',
+    fragments: [
+      
+      'Then I was driving a car away from our home and suddenly into Boston',
+      'The car broke down and I opened the trunk to find a small creature inside'
+    ],
+    tags: ['happy','city','car','monster'],
+    visionPath: '',
+    description: 'test description'
+  },
+  {
+    createDate: new Date(2019, 3, 0),
+    reaction: 'happy',
+    fragments: [
+      
+      'Then I was driving a car away from our home and suddenly into Boston',
+      'The car broke down and I opened the trunk to find a small creature inside'
+    ],
+    tags: ['happy','city','car','monster'],
+    visionPath: '',
+    description: 'test description'
+  },
+]
+    
