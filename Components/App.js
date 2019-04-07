@@ -44,7 +44,7 @@ class HomeScreen extends React.Component {
   headerLeft: (
                       <Icon
                         //onPress={() => this.  alert('This is a button!')}
-                        onPress={() => navigation.navigate('VisionCanvas')}
+                        onPress={() => navigation.navigate('SettingsScreen')}
                         name='bars'
                         size={26}
                         style = {{paddingLeft: 15}}

@@ -71,18 +71,15 @@ export default class DreamScreen extends Component {
             <HeaderEditIcon onPress={() => params.setReadOnly(false)}/> :
             <HeaderCheckIcon onDone={() => {
                 let db = DBManager.getInstance();
-                db.update({ $where: () => {
-                    (this.createDate.getDay() === today.getDay()) &&
-                    (this.createDate.getMonth() === today.getMonth()) &&
-                    (this.createDate.getFullYear() === today.getFullYear())
-                }}
-                , { 
-                    description: params.getDescription(),
-                    fragments: params.getFragments(),
-                    tags: params.getTags(),
+                db.update({ id: navigation.getParam('dreamObject').createDate.getTime() },
+                { $set: {
+                        description: params.getDescription(),
+                        fragments: params.getFragments(),
+                        tags: params.getTags(),
+                    }
                 },
-                 (err, doc) => {
-                  console.log('Updated doc:');
+                (err, doc) => {
+                  console.log('updated doc:');
                   console.log(doc);
                 });
                 params.setReadOnly(true);

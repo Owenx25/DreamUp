@@ -9,4 +9,10 @@ export default class DBManager {
 
         return this.db;
     }
+
+    static dateToId(date){
+        if (date != null)
+            return date.getDate().toString() + date.getMonth().toString() + date.getFullYear().toString();
+        return '';
+    }
 }

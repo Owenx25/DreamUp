@@ -85,7 +85,7 @@ class DreamFragmentScreen extends Component {
                     tags: [],
                     reaction: navigation.getParam('reaction', 'indifferent'),
                     description: '',
-                   // id: today.ge
+                    id: today.getTime(),
                 }
                 DBManager.getInstance().insert(doc);
                 navigation.replace('DreamScreen', {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FAB from 'react-native-fab'
 import { ScrollView, View } from 'react-native';
+import {withNavigationFocus} from 'react-navigation';
 
 import CardContainer from './CardContainer';
 import DreamGraph from './DreamGraph';
@@ -8,6 +9,7 @@ import DashboardDivider from './DashboardDivider';
 import AddReactionDialog from './AddReactionDialog';
 
 import DBManager from '../DBManager'
+import ChoiceDialog from './ChoiceDialog';
 
 // Holds all dashboard components
 export default class DreamDashboard extends Component {
@@ -15,7 +17,9 @@ export default class DreamDashboard extends Component {
     super(props);
     this.state = {
       reactionModalVisible: false,
+      deleteCardModalVisible: false,
       nightmares: [],
+      selectedDream: null,
     }
   }
 
@@ -24,7 +28,17 @@ export default class DreamDashboard extends Component {
   }
 
   _setReactionModalVisible = (visible) => {this.setState({reactionModalVisible: visible})}
+  _setDeleteCardModalVisible = (visible) => {this.setState({deleteCardModalVisible: visible})}
 
+  _onDeleteCardPress = () => {
+    let db = DBManager.getInstance();
+    let date = this.state.selectedDream.createDate;
+    db.remove({id: date.getTime()}, {}, (err, numRemoved) => {});
+    this.lookupRecentDreams();
+    this._setDeleteCardModalVisible(!this.state.deleteCardModalVisible);
+  }
+
+  // This updates the nightmares section right now
   lookupRecentDreams() {
     var today = new Date();
     let db = DBManager.getInstance()
@@ -37,9 +51,25 @@ export default class DreamDashboard extends Component {
     this.setState({ nightmares });
   }
 
+  // Throw any list refresh stuff in here
+  willFocus = this.props.navigation.addListener(
+    'willFocus',
+    () => {
+      this.lookupRecentDreams();
+    }
+  )
+
   render() {
-    return (  
+    return (
       <View style={{flex:10}}>
+        <ChoiceDialog
+          isModalVisible={this.state.deleteCardModalVisible}
+          message='Permantently delete this dream?'
+          lChoice='Yes'
+          onLChoice={() => this._onDeleteCardPress()}
+          rChoice='No'
+          onRChoice={() => this._setDeleteCardModalVisible(!this.state.deleteCardModalVisible)}
+        />
         <AddReactionDialog 
           isModalVisible={this.state.reactionModalVisible} 
           //onBackPressed={() => this._setReactionModalVisible(false)}
@@ -51,7 +81,14 @@ export default class DreamDashboard extends Component {
         <ScrollView>
           <CardContainer color='white' title='Recent Dreams' data={data} navigation={this.props.navigation}/>
           <DashboardDivider />
-          <CardContainer color='white' title='Nightmares' data={this.state.nightmares} navigation={this.props.navigation}/>
+          <CardContainer color='white' title='Nightmares' 
+            data={this.state.nightmares} 
+            navigation={this.props.navigation}
+            onCardLongPress={(dream) => {
+              this.setState({ selectedDream: dream });
+              this._setDeleteCardModalVisible(!this.state.deleteCardModalVisible);
+            }}
+          />
           <DashboardDivider />
           <DreamGraph name='Weekly Fragments'
           />

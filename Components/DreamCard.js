@@ -13,11 +13,12 @@ export default class DreamCard extends Component {
       <TouchableOpacity 
         style={{backgroundColor: '#c4941d', width: 120, margin: 10, justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'column'}}
         onPress={() => {
-          this.props.navigation.push('DreamScreen', {
+          this.props.navigation.navigate('DreamScreen', {
             existing: true,
             dreamObject: this.props.dreamObject
           });
         }}
+        onLongPress={this.props.onLongPress}
       >
         <Text style={{fontSize: 40, color: '#rgba(0,0,0,1.0)'}}>
           {DreamScreen.getReaction(this.props.dreamObject.reaction)}
