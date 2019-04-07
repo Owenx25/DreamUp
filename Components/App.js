@@ -16,6 +16,7 @@ import DrawerNavigator from './DrawerNavigator';
     tags: [string]
     reaction: string,
     description: string,
+    id: int,
   }
   Should be inserted into the DB!
   ex: {
@@ -29,6 +30,7 @@ import DrawerNavigator from './DrawerNavigator';
     tags: ['birthday', 'driving', 'monster'],
     reaction: 'indifferent',
     description: 'This is a really long description that could go on for many different characters with multiple paragraphs, newlines, and spaces'
+    id: some long number representing a date
   }
 */
 

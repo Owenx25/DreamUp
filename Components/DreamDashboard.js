@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FAB from 'react-native-fab'
-import { ScrollView, View } from 'react-native';
-import {withNavigationFocus} from 'react-navigation';
+import { ScrollView, View, Text } from 'react-native';
 
 import CardContainer from './CardContainer';
 import DreamGraph from './DreamGraph';
@@ -49,7 +48,7 @@ export default class DreamDashboard extends Component {
   )
   lookupDreams() {
     let db = DBManager.getInstance()
-    db.find({}, (err, docs) => this.setDreams(docs));
+    db.find({}).sort({ id: -1 }).exec((err, docs) => this.setDreams(docs));
     db.find({ nightmare: true }, (err, docs) => this.setNightmares(docs));
   }
   setNightmares(nightmares) {
@@ -64,11 +63,20 @@ export default class DreamDashboard extends Component {
   }
 
   render() {
+    this.state.dreams.length >= 7 ? 
+    graph = <DreamGraph name='Weekly Fragments' data={this.state.dreams.slice(0,7)} /> :
+    graph = (
+      <View style={{margin: 20, backgroundColor: '#c4941d'}}>
+        <Text style={{margin: 20, fontSize: 20, color: '#rgba(0,0,0,1.0)'}}>
+            Once you have 7 dreams you will see a weekly fragments graph!
+        </Text>
+      </View>
+    );
     return (
       <View style={{flex:10}}>
         <ChoiceDialog
           isModalVisible={this.state.deleteCardModalVisible}
-          message='Permantently delete this dream?'
+          message='Permanently delete this dream?'
           lChoice='Yes'
           onLChoice={() => this._onDeleteCardPress()}
           rChoice='No'
@@ -103,8 +111,7 @@ export default class DreamDashboard extends Component {
             }}
           />
           <DashboardDivider />
-          <DreamGraph name='Weekly Fragments'
-          />
+          {graph}
           <View style={{height: 100}}/>
         </ScrollView>
         <FAB buttonColor="#DAA520"
@@ -118,55 +125,3 @@ export default class DreamDashboard extends Component {
     )
   }
 }
-
- // Mock data for flat list
- const data = [
-  {
-    createDate: new Date(2019, 3, 0),
-    reaction: 'happy',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    visionPath: '',
-    description: 'test description'
-  },
-  {
-    createDate: new Date(2019, 2, 30),
-    reaction: 'sad',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    visionPath: '',
-    description: 'test description'
-  },
-  {
-    createDate: new Date(2019, 2, 29),
-    reaction: 'angry',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    visionPath: '',
-    description: 'test description'
-  },
-  {
-    createDate: new Date(2019, 2, 28),
-    reaction: 'afraid',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    visionPath: '',
-    description: 'test description'
-  },
-]
