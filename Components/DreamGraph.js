@@ -50,10 +50,10 @@ import DBManager from '../DBManager';
                     style={{ marginHorizontal: 10, height: 5, marginTop: 5}}
                     data={this.props.data}
                     numberOfTicks={this.props.data.length}  
-                    xAccessor={({ item }) => item.createDate.getDay()}
-                    formatLabel={( day ) => { 
+                    xAccessor={({ index }) => index}
+                    formatLabel={(_, index ) => { 
                         //return `${date.getDate()}/${date.getMonth()}`
-                        switch(day) {
+                        switch(this.props.data[index].createDate.getDay()) {
                         case 0: return 'SUN'
                         case 1: return'MON'
                         case 2: return 'TUE'
