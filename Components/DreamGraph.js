@@ -52,7 +52,7 @@ import DBManager from '../DBManager';
                     numberOfTicks={this.props.data.length}  
                     xAccessor={({ index }) => index}
                     formatLabel={(_, index ) => { 
-                        //return `${date.getDate()}/${date.getMonth()}`
+                        //return `${this.props.data[index].createDate.getMonth()}/${this.props.data[index].createDate.getDate()}`
                         switch(this.props.data[index].createDate.getDay()) {
                         case 0: return 'SUN'
                         case 1: return'MON'

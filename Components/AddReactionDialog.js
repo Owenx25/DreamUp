@@ -32,7 +32,7 @@ export default class AddReactionDialog extends Component {
                     <View style={styles.dialogBox}>
                         <Text style={styles.messageText}>What was your overall reaction?</Text>
                         <View style={styles.buttons}> 
-                            <View style={styles.buttonRow1}>
+                            <View style={styles.buttonColumn}>
                                 <TouchableOpacity 
                                     onPress={() => this.setState({currentSelected: 'happy'})}
                                     style={this.state.currentSelected == 'happy' ? styles.selectedCard : styles.reactionCard} 
@@ -40,30 +40,18 @@ export default class AddReactionDialog extends Component {
                                     <Text style={styles.emoji}>😃</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity 
-                                    onPress={() => this.setState({currentSelected: 'sad'})}
-                                    style={this.state.currentSelected == 'sad' ? styles.selectedCard : styles.reactionCard}     
-                                >
-                                    <Text style={styles.emoji}>😥</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity 
-                                    onPress={() => this.setState({currentSelected: 'angry'})}
-                                    style={this.state.currentSelected == 'angry' ? styles.selectedCard : styles.reactionCard} 
-                                >
-                                    <Text style={styles.emoji}>😡</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity 
-                                    onPress={() => this.setState({currentSelected: 'afraid'})}
-                                    style={this.state.currentSelected == 'afraid' ? styles.selectedCard : styles.reactionCard}     
-                                >
-                                    <Text style={styles.emoji}>😱</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={styles.buttonRow2}>
-                                <TouchableOpacity 
                                     onPress={() => this.setState({currentSelected: 'confused'})}
                                     style={this.state.currentSelected == 'confused' ? styles.selectedCard : styles.reactionCard}     
                                 >
                                     <Text style={styles.emoji}>🤔</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.buttonColumn}>
+                                <TouchableOpacity 
+                                    onPress={() => this.setState({currentSelected: 'sad'})}
+                                    style={this.state.currentSelected == 'sad' ? styles.selectedCard : styles.reactionCard}     
+                                >
+                                    <Text style={styles.emoji}>😥</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity 
                                     onPress={() => this.setState({currentSelected: 'suprised'})}
@@ -71,24 +59,40 @@ export default class AddReactionDialog extends Component {
                                 >
                                     <Text style={styles.emoji}>🤯</Text>
                                 </TouchableOpacity>
+                            </View>
+                            <View style={styles.buttonColumn}> 
+                                <TouchableOpacity 
+                                    onPress={() => this.setState({currentSelected: 'angry'})}
+                                    style={this.state.currentSelected == 'angry' ? styles.selectedCard : styles.reactionCard} 
+                                >
+                                    <Text style={styles.emoji}>😡</Text>
+                                </TouchableOpacity>
                                 <TouchableOpacity 
                                     onPress={() => this.setState({currentSelected: 'indifferent'})}
                                     style={this.state.currentSelected == 'indifferent' ? styles.selectedCard : styles.reactionCard}     
                                 >
                                     <Text style={styles.emoji}>😐</Text>
                                 </TouchableOpacity>
+                            </View>
+                            <View style={styles.buttonColumn}>
+                            <TouchableOpacity 
+                                    onPress={() => this.setState({currentSelected: 'afraid'})}
+                                    style={this.state.currentSelected == 'afraid' ? styles.selectedCard : styles.reactionCard}     
+                                >
+                                    <Text style={styles.emoji}>😱</Text>
+                                </TouchableOpacity>  
                                 <TouchableOpacity 
                                     onPress={() => this.state.currentSelected != '' ? 
                                         this.props.onDone(this.state.currentSelected) :
                                         null
                                     }
-                                    style={{justifyContent: 'center', alignItems: 'center', paddingRight: 10}}    
+                                    style={{justifyContent: 'center', alignItems: 'center', paddingLeft: 2, paddingBottom: 20}}    
                                 >
                                     <Icon name='done' size={40} color='#000'/>
                                 </TouchableOpacity>
                             </View>
                         </View>
-                    </View>
+                    </View> 
                 </View>
             </Modal>
         )
@@ -112,30 +116,31 @@ const styles = StyleSheet.create({
     },
     buttons: {
         flex: 1,
-        paddingBottom: 20,
-        justifyContent: 'space-between',
-        flexDirection: 'column',
-    },
-    buttonRow1: {
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        marginBottom: 10,
-    },
-    buttonRow2: {
         justifyContent: 'space-between',
         flexDirection: 'row',
     },
     emoji: {
         fontSize: 50,
         color: 'rgba(0,0,0,1)',
+        paddingBottom: 7
     },
     reactionCard: {
         fontSize: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 2
     },
     selectedCard: {
         fontSize: 50,
         borderColor: '#b300b3',
-        borderWidth: 1,
-        borderRadius: 5,
+        borderWidth: 2,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    buttonColumn: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        margin: 5
     }
 })

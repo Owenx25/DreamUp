@@ -116,7 +116,7 @@ export default class DreamDashboard extends Component {
         </ScrollView>
         <FAB buttonColor="#DAA520"
           iconTextColor="white"
-          onClickAction={() => {
+          onClickAction={() => {           
             this._setReactionModalVisible(!this.state.reactionModalVisible);    
           }}
           visible={true}
