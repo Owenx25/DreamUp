@@ -32,6 +32,7 @@ export default class DreamFragmentInput extends Component {
             return;
         }
         this.props.onAddFragmentPress(this.state.fragment);
+        this.setState({ fragment: '' });
         this.TextInput.clear();
     }
 
