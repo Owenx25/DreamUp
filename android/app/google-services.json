@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "182829688902",
+    "firebase_url": "https://dreamup-omjp.firebaseio.com",
+    "project_id": "dreamup-omjp",
+    "storage_bucket": "dreamup-omjp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182829688902:android:e9944895b5701eca",
+        "android_client_info": {
+          "package_name": "com.dreamup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182829688902-5nfq18akuafl4kg57434hc3m3i2ccalv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJH11PtcA5pttJP-fZMGvsT3jaP_aIR2E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182829688902-5nfq18akuafl4kg57434hc3m3i2ccalv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

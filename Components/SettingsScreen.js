@@ -26,8 +26,8 @@ render() {
   return (
     <ReactNativeSettingsPage>
       <NavigateRow
-						text='Navigate Row'
-						iconName='bell'
+						text=''
+						iconName='arrow-left'
 						onPressCallback={this._navigateToScreen} />
       <SectionRow text='Settings'>  
         <SwitchRow 
