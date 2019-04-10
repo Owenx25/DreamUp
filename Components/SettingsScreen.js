@@ -18,9 +18,17 @@ state = {
   switch: true,
   value: 40
 }
+_navigateToScreen = () => {
+  const { navigation } = this.props
+  navigation.navigate('Home');
+}
 render() {
   return (
     <ReactNativeSettingsPage>
+      <NavigateRow
+						text='Navigate Row'
+						iconName='bell'
+						onPressCallback={this._navigateToScreen} />
       <SectionRow text='Settings'>  
         <SwitchRow 
           text=' DreamUp Notifications' 

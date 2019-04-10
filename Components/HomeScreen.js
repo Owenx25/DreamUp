@@ -16,7 +16,7 @@ export default class HomeScreen extends Component {
                       ),
       headerRight: (
                         <Icon
-                         onPress={() => alert('DreamUp 2019')}
+                         onPress={() => alert('DreamUp 2019\n\nDevelopers:\nOwen McCormack\nJacob Phillps')}
                           name='info-circle'
                           size={26}
                           style = {{paddingRight: 15}}
