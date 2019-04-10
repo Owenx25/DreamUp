@@ -35,7 +35,8 @@ const DrawerConfig = {
 const DrawerNavigator = createDrawerNavigator(
     {
         Home: RootStack,
-        Settings: SettingsScreen
+        Settings: SettingsScreen,
+        VisionCanvas: VisionCanvas,
     },
     DrawerConfig
 );
