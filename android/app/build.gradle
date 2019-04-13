@@ -134,6 +134,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-push-notification')
     implementation project(':react-native-firebase')
     implementation project(':@react-native-community_async-storage')
     implementation project(':@terrylinla_react-native-sketch-canvas')
@@ -145,6 +146,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "com.google.android.gms:play-services-base:16.1.0"
     implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
  // Getting a "Could not find" error? Make sure that you've added
  // Google's Maven repository to your root-level build.gradle file
 }
