@@ -5,6 +5,7 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.terrylinla.rnsketchcanvas.SketchCanvasPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -30,13 +31,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ReactNativePushNotificationPackage(),
-            new RNFirebasePackage(),
-            new AsyncStoragePackage(),
-            new SketchCanvasPackage(),
-            new RNGestureHandlerPackage(),
-            new VectorIconsPackage(),
-            new SvgPackage()
+          new ReactNativePushNotificationPackage(),
+          new RNFirebasePackage(),
+          new AsyncStoragePackage(),
+          new SketchCanvasPackage(),
+          new RNGestureHandlerPackage(),
+          new VectorIconsPackage(),
+          new SvgPackage(),
+          new RNFirebaseNotificationsPackage()
       );
     }
 

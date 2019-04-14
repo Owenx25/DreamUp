@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import PushNotification from 'react-native-push-notification'
 //import { createStackNavigator, createAppContainer } from 'react-navigation';
 import DreamDashboard from './DreamDashboard';
 import DreamScreen from './DreamScreen';
@@ -7,6 +8,8 @@ import VisionCanvas from './VisionCanvas';
 import DreamFragmentScreen from './DreamFragmentScreen';
 import SettingsScreen from './SettingsScreen';
 import DrawerNavigator from './DrawerNavigator';
+import firebase from 'react-native-firebase';
+import PushController from './PushController'
 
 /* Only objects like : 
   {
@@ -39,14 +42,30 @@ import DrawerNavigator from './DrawerNavigator';
 //const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
+  constructor(props){
+    super(props);
+    PushNotification.localNotificationSchedule({
+      //... You can use all the options from localNotifications
+      message: "My Notification Message", // (required)
+      date: new Date(Date.now() + (5 * 1000)) // in 60 secs
+    });
+  };
   render() {
     return(
     <View style={styles.container}>
       <DrawerNavigator/>
+      <PushController/>
     </View>
     );
   }
 }
+
+// Build a channel
+const channel = new firebase.notifications.Android.Channel('test-channel', 'Test Channel', firebase.notifications.Android.Importance.Max)
+  .setDescription('My apps test channel');
+  
+// Create the channel
+firebase.notifications().android.createChannel(channel);
 
 const styles = StyleSheet.create({
   container: {
