@@ -8,8 +8,8 @@ import  {
   SliderRow
 } from 'react-native-settings-page';
 import SettingsWrapperScreen from './SettingsWrapperScreen';
-import DateTimePicker from 'react-native-modal-datetime-picker'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import DateTimePicker from 'react-native-modal-datetime-picker';
+import PushNotification from 'react-native-push-notification';
 
 export default class SettingsScreen extends Component {
   static navigationOptions = {
@@ -51,10 +51,15 @@ _navigateToHome = () => {
   const { navigation } = this.props
   navigation.navigate('Home');
 }
-_navigateToNotificationTime = () => {
-  const { navigation } = this.props
-  navigation.navigate('TimePicker');
-}
+_handleDatePicked = (date) => {
+  PushNotification.localNotificationSchedule({
+    //... You can use all the options from localNotifications
+    message: "Enter your dreams!", // (required)
+    date: date, // in 60 secs
+    repeatType: 'day'
+  });
+  this.setState({dateTimeVisible: false});
+};
 render() {
   return (
     <View style ={{flex:1}}>
@@ -89,8 +94,9 @@ render() {
     </SettingsWrapperScreen>
     <DateTimePicker
           isVisible={this.state.dateTimeVisible}
-          onConfirm={() => {this.setState({dateTimeVisible: false})}}
+          onConfirm={this._handleDatePicked}
           onCancel={() => {this.setState({dateTimeVisible: false})}}
+          mode='datetime'
         />
     </View>
     

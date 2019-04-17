@@ -10,7 +10,6 @@ import SettingsScreen from './SettingsScreen';
 import DrawerNavigator from './DrawerNavigator';
 import firebase from 'react-native-firebase';
 import PushController from './PushController';
-import TimePicker, {date12} from './TimePicker';
 
 /* Only objects like : 
   {
@@ -43,7 +42,7 @@ import TimePicker, {date12} from './TimePicker';
 //const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
-  constructor(props){
+/*  constructor(props){
     super(props);
     PushNotification.localNotificationSchedule({
       //... You can use all the options from localNotifications
@@ -51,7 +50,7 @@ export default class App extends React.Component {
       date: new Date(Date.now() + (5 * 1000)), // in 60 secs
       repeatType: 'day'
     });
-  };
+  };*/
   render() {
     return(
     <View style={styles.container}>

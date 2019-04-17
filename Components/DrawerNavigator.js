@@ -6,7 +6,6 @@ import HomeScreen from './HomeScreen';
 import DreamScreen from './DreamScreen';
 import VisionCanvas from './VisionCanvas';
 import DreamFragmentScreen from './DreamFragmentScreen';
-import TimePicker from './TimePicker';
 
 export const RootStack = createStackNavigator({
     Home: HomeScreen,
@@ -14,7 +13,6 @@ export const RootStack = createStackNavigator({
     VisionCanvas: VisionCanvas,
     DreamFragmentScreen: DreamFragmentScreen,
     SettingsScreen: SettingsScreen,
-    TimePicker: TimePicker
   },
   {
     defaultRoot: 'Home',
@@ -26,21 +24,6 @@ export const RootStack = createStackNavigator({
     navigationOptions: {
     }
   });
-  export const SettingsRootStack = createStackNavigator({
-    SettingsScreen: SettingsScreen,
-    TimePicker: TimePicker
-  },
-  {
-    defaultRoot: 'Settings',
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#c4941d'
-      }
-    },
-    navigationOptions: {
-    }
-  });
-
 const WIDTH = Dimensions.get('window').width;
 
 const DrawerConfig = {
