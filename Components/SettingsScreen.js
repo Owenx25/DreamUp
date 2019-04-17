@@ -52,12 +52,14 @@ _navigateToHome = () => {
   navigation.navigate('Home');
 }
 _handleDatePicked = (date) => {
-  PushNotification.localNotificationSchedule({
-    //... You can use all the options from localNotifications
-    message: "Enter your dreams!", // (required)
-    date: date, // in 60 secs
-    repeatType: 'day'
-  });
+  if(this.state.switch && !this.state.check){
+    PushNotification.localNotificationSchedule({
+      message: "Enter your dreams!",
+      date: date,
+      repeatType: 'day',
+      playSound: value,
+    });
+  }
   this.setState({dateTimeVisible: false});
 };
 render() {
