@@ -9,7 +9,8 @@ import DreamFragmentScreen from './DreamFragmentScreen';
 import SettingsScreen from './SettingsScreen';
 import DrawerNavigator from './DrawerNavigator';
 import firebase from 'react-native-firebase';
-import PushController from './PushController'
+import PushController from './PushController';
+import TimePicker, {date12} from './TimePicker';
 
 /* Only objects like : 
   {

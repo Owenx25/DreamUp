@@ -27,7 +27,7 @@ export const RootStack = createStackNavigator({
     }
   });
   export const SettingsRootStack = createStackNavigator({
-    Settings: SettingsScreen,
+    SettingsScreen: SettingsScreen,
     TimePicker: TimePicker
   },
   {
@@ -50,7 +50,7 @@ const DrawerConfig = {
 const DrawerNavigator = createDrawerNavigator(
     {
         Home: RootStack,
-        Settings: SettingsRootStack,
+        SettingsScreen: SettingsScreen,
         VisionCanvas: VisionCanvas,
     },
     DrawerConfig

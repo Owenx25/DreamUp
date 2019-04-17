@@ -8,11 +8,15 @@ import  {
   SliderRow
 } from 'react-native-settings-page';
 import SettingsWrapperScreen from './SettingsWrapperScreen';
+import DateTimePicker from 'react-native-modal-datetime-picker'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class SettingsScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Settings',
+  static navigationOptions = {
+    title: 'Settings'
+  };
+ /* static navigationOptions = ({ navigation }) => ({
+    title: 'Settings',};
         headerTitleStyle: {
             textAlign:"center",
             flex:1
@@ -36,10 +40,11 @@ export default class SettingsScreen extends Component {
     headerStyle: {
       backgroundColor: '#c4941d',
       }
-    });
+    });*/
 state = {
   check: false,
   switch: true,
+  dateTimeVisible: false,
   value: 40
 }
 _navigateToHome = () => {
@@ -52,17 +57,9 @@ _navigateToNotificationTime = () => {
 }
 render() {
   return (
+    <View style ={{flex:1}}>
     <SettingsWrapperScreen>
-      <SectionRow text='Notifications'>  
-        <SwitchRow 
-          text=' DreamUp Notifications' 
-          iconName='bell'
-          _value={this.state.switch}
-          _onValueChange={() => { this.setState({ switch: !this.state.switch }) }} />
-        <NavigateRow
-          text='Set Notification Time'
-          iconName='clock'
-          onPressCallback={this._navigateToNotificationTime} />
+      <SectionRow text='General'>
         <CheckRow 
           text='  DreamUp Do Not Disturb'
           iconName='bed'
@@ -78,7 +75,24 @@ render() {
           _value={this.state.value}
           _onValueChange={value => { this.setState({ value }) }} />
       </SectionRow>
+      <SectionRow text='Notifications'>  
+        <SwitchRow 
+          text=' DreamUp Notifications' 
+          iconName='exclamation'
+          _value={this.state.switch}
+          _onValueChange={() => { this.setState({ switch: !this.state.switch }) }} />
+        <NavigateRow
+          text='Set Notification Time'
+          iconName='bell'
+          onPressCallback={() => {this.setState({ dateTimeVisible: true})}} />
+          </SectionRow>
     </SettingsWrapperScreen>
+    <DateTimePicker
+          isVisible={this.state.dateTimeVisible}
+          onConfirm={() => {this.setState({dateTimeVisible: false})}}
+          onCancel={() => {this.setState({dateTimeVisible: false})}}
+        />
+    </View>
     
   )
 }

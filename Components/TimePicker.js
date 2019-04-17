@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
-export default class DateTimePickerTester extends Component {
+export default class TimePicker extends Component {
   state = {
     isDateTimePickerVisible: true,
   };
@@ -15,7 +15,6 @@ export default class DateTimePickerTester extends Component {
   _hideDateTimePicker = () => {
       this.setState({ isDateTimePickerVisible: false });
       this._navigateBack();
-      this.props.navigation.navigate('SettingsScreen');
     };
 
   _handleDatePicked = (date) => {
@@ -30,6 +29,8 @@ export default class DateTimePickerTester extends Component {
           isVisible={this.state.isDateTimePickerVisible}
           onConfirm={this._handleDatePicked}
           onCancel={this._hideDateTimePicker}
+          timePickerModeAndroid = 'spinner'
+          mode = 'datetime'
         />
       </View>
     );
