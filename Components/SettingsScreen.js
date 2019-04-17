@@ -1,40 +1,68 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, View, Text, Alert } from 'react-native';
-import ReactNativeSettingsPage, { 
+import  { 
 	SectionRow, 
 	NavigateRow,
   CheckRow,
   SwitchRow,
   SliderRow
 } from 'react-native-settings-page';
+import SettingsWrapperScreen from './SettingsWrapperScreen';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class SettingsScreen extends Component {
-    static navigationOptions = {
-        title: 'Settings',
-      };
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Settings',
+        headerTitleStyle: {
+            textAlign:"center",
+            flex:1
+        },
+    headerLeft: (
+                      <Icon
+                      onPress={() => navigation.navigate('Home')}
+                      name='arrow-left'
+                      size={26}
+                      style = {{paddingLeft: 15}}
+                    />
+                      ),
+      headerRight: (
+                        <Icon
+                         onPress={() => alert('DreamUp 2019\n\nDevelopers:\nOwen McCormack\nJacob Phillps')}
+                          name=''
+                          size={26}
+                          style = {{paddingRight: 15}}
+                        />
+                      ),
+    headerStyle: {
+      backgroundColor: '#c4941d',
+      }
+    });
 state = {
   check: false,
   switch: true,
   value: 40
 }
-_navigateToScreen = () => {
+_navigateToHome = () => {
   const { navigation } = this.props
   navigation.navigate('Home');
 }
+_navigateToNotificationTime = () => {
+  const { navigation } = this.props
+  navigation.navigate('TimePicker');
+}
 render() {
   return (
-    <ReactNativeSettingsPage>
-      <NavigateRow
-						text=''
-						iconName='arrow-left'
-						onPressCallback={this._navigateToScreen} />
-      <SectionRow text='Settings'>  
+    <SettingsWrapperScreen>
+      <SectionRow text='Notifications'>  
         <SwitchRow 
           text=' DreamUp Notifications' 
           iconName='bell'
           _value={this.state.switch}
           _onValueChange={() => { this.setState({ switch: !this.state.switch }) }} />
+        <NavigateRow
+          text='Set Notification Time'
+          iconName='clock'
+          onPressCallback={this._navigateToNotificationTime} />
         <CheckRow 
           text='  DreamUp Do Not Disturb'
           iconName='bed'
@@ -50,15 +78,26 @@ render() {
           _value={this.state.value}
           _onValueChange={value => { this.setState({ value }) }} />
       </SectionRow>
-    </ReactNativeSettingsPage>
+    </SettingsWrapperScreen>
+    
   )
 }
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
+    flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#EAE5FB',//F5FCFF
   },
+  strokeColorButton: {
+    marginHorizontal: 2.5, marginVertical: 8, width: 30, height: 30, borderRadius: 15,
+  },
+  strokeWidthButton: {
+    marginHorizontal: 2.5, marginVertical: 8, width: 30, height: 30, borderRadius: 15,
+    justifyContent: 'center', alignItems: 'center', backgroundColor: '#2b1381'
+  },
+  functionButton: {
+    marginHorizontal: 2.5, marginVertical: 8, height: 30, width: 60,
+    backgroundColor: '#c4941d', justifyContent: 'center', alignItems: 'center', borderRadius: 5,
+  }
 });
 
        

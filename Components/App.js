@@ -46,8 +46,9 @@ export default class App extends React.Component {
     super(props);
     PushNotification.localNotificationSchedule({
       //... You can use all the options from localNotifications
-      message: "My Notification Message", // (required)
-      date: new Date(Date.now() + (5 * 1000)) // in 60 secs
+      message: "Enter your dreams!", // (required)
+      date: new Date(Date.now() + (5 * 1000)), // in 60 secs
+      repeatType: 'day'
     });
   };
   render() {
