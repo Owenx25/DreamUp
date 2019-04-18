@@ -57,7 +57,7 @@ _handleDatePicked = (date) => {
       message: "Enter your dreams!",
       date: date,
       repeatType: 'day',
-      playSound: value,
+      playSound: this.state.value,
     });
   }
   this.setState({dateTimeVisible: false});
