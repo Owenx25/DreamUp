@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { BarChart, AreaChart, YAxis, XAxis, Grid } from 'react-native-svg-charts';
-import * as scale from 'd3-scale';
+import { BarChart, YAxis, XAxis, Grid } from 'react-native-svg-charts';
 
-import DBManager from '../DBManager';
 
 // Graph of some data related to dreams
 // const Gradient = () => (
@@ -85,91 +83,4 @@ import DBManager from '../DBManager';
     }});
     
 
-const data = [ 
-  {
-    createDate: new Date(2019, 3, 0),
-    reaction: 'happy',
-    fragments: [
-      
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    visionPath: '',
-    description: 'test description'
-  },
-  {
-    createDate: new Date(2019, 2, 30),
-    reaction: 'sad',
-    fragments: [
-      'My family was celebrating my birthday',
-      'My family was celebrating my birthday',
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    visionPath: '',
-    description: 'test description'
-  },
-  {
-    createDate: new Date(2019, 2, 29),
-    reaction: 'angry',
-    fragments: [
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    visionPath: '',
-    description: 'test description'
-  },
-  {
-    createDate: new Date(2019, 2, 28),
-    reaction: 'afraid',
-    fragments: [
-      'My family was celebrating my birthday',
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside',
-      'My family was celebrating my birthday',
-    ],
-    tags: ['happy','city','car','monster'],
-    visionPath: '',
-    description: 'test description'
-  },
-  {
-    createDate: new Date(2019, 3, 0),
-    reaction: 'happy',
-    fragments: [
-      
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    visionPath: '',
-    description: 'test description'
-  },
-  {
-    createDate: new Date(2019, 3, 0),
-    reaction: 'happy',
-    fragments: [
-      
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    visionPath: '',
-    description: 'test description'
-  },
-  {
-    createDate: new Date(2019, 3, 0),
-    reaction: 'happy',
-    fragments: [
-      
-      'Then I was driving a car away from our home and suddenly into Boston',
-      'The car broke down and I opened the trunk to find a small creature inside'
-    ],
-    tags: ['happy','city','car','monster'],
-    visionPath: '',
-    description: 'test description'
-  },
-]
     

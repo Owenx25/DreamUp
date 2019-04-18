@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {NavigationActions} from 'react-navigation';
 import PropTypes from 'prop-types';
-import {ScrollView, Text, View} from 'react-native';
 import { DrawerActions } from 'react-navigation';
-import styles from '../../styles/index';
 import VisionCanvas from './VisionCanvas';
 
 

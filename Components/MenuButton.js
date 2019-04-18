@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-//import { createStackNavigator, createAppContainer } from 'react-navigation';
-import DreamDashboard from './DreamDashboard';
-import DreamScreen from './DreamScreen';
-import VisionCanvas from './VisionCanvas';
-import DreamFragmentScreen from './DreamFragmentScreen';
-import SettingsScreen from './SettingsScreen';
-import DrawerNavigator from './DrawerNavigator';
 
 export default class MenuButton extends Component {
  

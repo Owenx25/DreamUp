@@ -1,5 +1,4 @@
-import React from 'react';
-import { Platform, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 import { createDrawerNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import SettingsScreen from './SettingsScreen';
 import HomeScreen from './HomeScreen';
