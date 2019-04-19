@@ -37,6 +37,7 @@ export default class DreamScreen extends Component {
             description: this.props.navigation.getParam('dreamObject').description,
             fragments: [...this.props.navigation.getParam('dreamObject').fragments],
             tags: [...this.props.navigation.getParam('dreamObject').tags],
+            image: this.getVisionPath()
         }
     }
 
@@ -104,9 +105,9 @@ export default class DreamScreen extends Component {
     getVisionPath() {
         let path = this.props.navigation.getParam('dreamObject').visionPath;
         if (path) {
-            return 'file:///' + path;
+            return {uri: 'file:///' + path};
         } else {
-            return 'file:///storage/emulated/0/Pictures/Dreams/80579150.jpg';
+            return require('../ImageMissing.png');
         }
     }
 
@@ -122,6 +123,8 @@ export default class DreamScreen extends Component {
         }
     }
 
+    _onImageError = (e) => {this.setState({image: require('../ImageMissing.png')})} 
+
     render() {
         return (
             <View style={{backgroundColor: '#2b1381', flex: 1, flexDirection: 'column'}}>
@@ -129,7 +132,12 @@ export default class DreamScreen extends Component {
                     <View style={{margin: 20}}>
                         <Text style={{color: '#c4941d', fontSize: 24, marginBottom: 10}}>Vision</Text>
                         <View style={{alignItems: 'center'}}>
-                            <Image resizeMode='contain' style={{height: 300, width: 300}} source={{uri: this.getVisionPath()}}/>
+                            <Image 
+                                resizeMode='contain' 
+                                style={{height: 300, width: 300}} 
+                                source={this.state.image}
+                                onError={this._onImageError}
+                            />
                         </View>
                     </View>
                     <DashboardDivider/>
