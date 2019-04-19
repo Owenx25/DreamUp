@@ -13,7 +13,7 @@ import PushNotification from 'react-native-push-notification';
 
 export default class SettingsScreen extends Component {
   static navigationOptions = {
-    title: 'Settings'
+    title: 'Settings',
   };
  /* static navigationOptions = ({ navigation }) => ({
     title: 'Settings',};
@@ -45,7 +45,8 @@ state = {
   check: false,
   switch: true,
   dateTimeVisible: false,
-  value: 40
+  value: 40,
+  currentNotificationDate: null,
 }
 _navigateToHome = () => {
   const { navigation } = this.props
@@ -60,9 +61,25 @@ _handleDatePicked = (date) => {
       repeatType: 'day',
       playSound: this.state.value,
     });
+    this.setState({currentNotificationDate: date});
   }
   this.setState({dateTimeVisible: false});
 };
+
+_handleDoNotDisturb = () => {
+  if (this.state.check == false) {
+    PushNotification.cancelAllLocalNotifications();
+  } else if(this.state.currentNotificationDate != null){
+    PushNotification.localNotificationSchedule({
+      message: "Enter your dreams!",
+      date: this.state.currentNotificationDate,
+      repeatType: 'day',
+      playSound: this.state.value,
+    });
+  }
+  this.setState({ check: !this.state.check });
+};
+
 render() {
   return (
     <View style ={{flex:1}}>
@@ -73,7 +90,7 @@ render() {
           iconName='bed'
           _color='#000'
           _value={this.state.check}
-          _onValueChange={() => { this.setState({ check: !this.state.check }) }} />
+          _onValueChange={this._handleDoNotDisturb} />
         <SliderRow 
           text='DreamUp Volume'
           iconName='volume-up'
@@ -101,10 +118,8 @@ render() {
           onCancel={() => {this.setState({dateTimeVisible: false})}}
           mode='datetime'
         />
-    </View>
-    
-  )
-}
+    </View>   
+  )}
 }
 const styles = StyleSheet.create({
   container: {
