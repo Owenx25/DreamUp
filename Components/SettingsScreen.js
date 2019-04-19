@@ -53,6 +53,7 @@ _navigateToHome = () => {
 }
 _handleDatePicked = (date) => {
   if(this.state.switch && !this.state.check){
+    PushNotification.cancelAllLocalNotifications();
     PushNotification.localNotificationSchedule({
       message: "Enter your dreams!",
       date: date,
