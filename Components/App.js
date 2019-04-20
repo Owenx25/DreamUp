@@ -37,7 +37,7 @@ import PushController from './PushController';
   }
 */
 
-
+console.disableYellowBox = true;
 
 //const AppContainer = createAppContainer(RootStack);
 
