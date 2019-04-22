@@ -11,5 +11,5 @@ Status:
 
     If you want to avoid running a local server and downloading packages a signed apk can found in the project at:
     DreamUp\android\app\release\DreamApp.apk
-    This apk should be easily to install once transferred to the desired emulator/device.
+    This apk should be easily installed once transferred to the desired emulator/device.
     
