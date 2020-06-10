@@ -17,7 +17,7 @@ Users can also set up a repeating notification to remind them to enter info for 
 ### Screens
 
 <p float="left">
-<img src="./readmePictures/DreamdashboardScreen.jpg" width="200">
+<img src="./readmePictures/DreamDashboardScreen.jpg" width="200">
 <img src="./readmePictures/DrawerMenu.jpg" width="200">
 <img src="./readmePictures/AddReaction.jpg" width="200">
 </p>
